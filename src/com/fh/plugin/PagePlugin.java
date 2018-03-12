@@ -47,8 +47,8 @@ import com.fh.util.Tools;
 @Intercepts({@Signature(type=StatementHandler.class,method="prepare",args={Connection.class})})
 public class PagePlugin implements Interceptor {
 
-	private static String dialect = "";	//数据库方言
-	private static String pageSqlId = ""; //mapper.xml中需要拦截的ID(正则匹配)
+	private static String dialect = "oracle";	//数据库方言
+	private static String pageSqlId = ".*listPage.*"; //mapper.xml中需要拦截的ID(正则匹配)
 	
 	public Object intercept(Invocation ivk) throws Throwable {
 		// TODO Auto-generated method stub

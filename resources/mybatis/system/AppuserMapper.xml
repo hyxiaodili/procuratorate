@@ -22,7 +22,7 @@
 	  		or
 	  		("EMAIL" = #{USERNAME} and "PASSWORD" = #{PASSWORD})
 	  		or
-	  		("NUMBER" = #{USERNAME} and "PASSWORD" = #{PASSWORD})
+	  		("NUMBERR" = #{USERNAME} and "PASSWORD" = #{PASSWORD})
 	  		)
 		</if>
 		<if test="USER_ID != null and USER_ID != ''">
@@ -53,7 +53,7 @@
 				YEARS					= #{YEARS},
 				STATUS 					= #{STATUS},
 				EMAIL					= #{EMAIL},
-				NUMBER 					= #{NUMBER}
+				NUMBERR 					= #{NUMBERR}
 			<if test="PASSWORD != null and PASSWORD != ''">
 				,PASSWORD				= #{PASSWORD}
 			</if>
@@ -80,7 +80,7 @@
 			END_TIME,
 			YEARS,
 			EMAIL,
-			NUMBER
+			NUMBERR
 		from 
 			SYS_APP_USER
 		where 
@@ -106,7 +106,7 @@
 			END_TIME,
 			YEARS,
 			EMAIL,
-			NUMBER
+			NUMBERR
 		from 
 			SYS_APP_USER
 		where 
@@ -135,11 +135,11 @@
 			END_TIME,
 			YEARS,
 			EMAIL,
-			NUMBER
+			NUMBERR
 		from 
 			SYS_APP_USER
 		where 
-			NUMBER = #{NUMBER}
+			NUMBERR = #{NUMBERR}
 		<if test="USERNAME != null and USERNAME != ''">
 			and USERNAME != #{USERNAME} 
 		</if>
@@ -164,7 +164,7 @@
 			END_TIME,
 			YEARS,
 			EMAIL,
-			NUMBER
+			NUMBERR
 		from 
 			SYS_APP_USER
 		where 
@@ -190,7 +190,7 @@
 			END_TIME,
 			YEARS,
 			EMAIL,
-			NUMBER
+			NUMBERR
 		) values (
 			#{USER_ID},
 			#{USERNAME},
@@ -208,7 +208,7 @@
 			#{END_TIME},
 			#{YEARS},
 			#{EMAIL},
-			#{NUMBER}
+			#{NUMBERR}
 		)
 	</insert>
 	<!-- 用户列表(app用户组) -->
@@ -224,7 +224,7 @@
 				u.STATUS,
 				u.EMAIL,
 				u.PHONE,
-				u.NUMBER,
+				u.NUMBERR,
 				r.ROLE_ID,
 				r.ROLE_NAME
 		from SYS_APP_USER u, SYS_ROLE r 
@@ -238,7 +238,7 @@
 				or
 				u.EMAIL LIKE CONCAT(CONCAT('%', #{pd.USERNAME}),'%')
 				or
-				u.NUMBER LIKE CONCAT(CONCAT('%', #{pd.USERNAME}),'%')
+				u.NUMBERR LIKE CONCAT(CONCAT('%', #{pd.USERNAME}),'%')
 				)
 		</if>
 		<if test="pd.ROLE_ID != null and pd.ROLE_ID != ''"><!-- 角色检索 -->
@@ -269,7 +269,7 @@
 				u.EMAIL,
 				u.SFID,
 				u.PHONE,
-				u.NUMBER,
+				u.NUMBERR,
 				r.ROLE_ID,
 				r.ROLE_NAME
 		from SYS_APP_USER u, SYS_ROLE r 
@@ -283,7 +283,7 @@
 				or
 				u.EMAIL LIKE CONCAT(CONCAT('%', #{USERNAME}),'%')
 				or
-				u.NUMBER LIKE CONCAT(CONCAT('%', #{USERNAME}),'%')
+				u.NUMBERR LIKE CONCAT(CONCAT('%', #{USERNAME}),'%')
 				)
 		</if>
 		<if test="ROLE_ID != null and ROLE_ID != ''"><!-- 角色检索 -->
