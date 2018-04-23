@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
 import com.fh.entity.system.Menu;
 import com.fh.entity.system.Role;
 import com.fh.entity.system.User;
+import com.fh.service.depart.DepartService;
 import com.fh.service.system.menu.MenuService;
 import com.fh.service.system.role.RoleService;
 import com.fh.service.system.user.UserService;
@@ -33,6 +35,7 @@ import com.fh.util.DateUtil;
 import com.fh.util.PageData;
 import com.fh.util.RightsHelper;
 import com.fh.util.Tools;
+import com.fh.util.MD5;;
 /*
  * 总入口
  */
@@ -45,6 +48,9 @@ public class LoginController extends BaseController {
 	private MenuService menuService;
 	@Resource(name="roleService")
 	private RoleService roleService;
+	@Resource(name="departService")
+	private DepartService departService;
+	
 	
 	/**
 	 * 获取登录用户的IP
@@ -77,6 +83,12 @@ public class LoginController extends BaseController {
 		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称
 		mv.setViewName("system/admin/login");
 		mv.addObject("pd",pd);
+		//加入院名
+		Page  page = new Page();
+		page.setPd(pd);
+		List<PageData> departList = departService.list(page);
+		mv.addObject("departList",departList);
+		mv.addObject("pd",pd);
 		return mv;
 	}
 	
@@ -92,7 +104,7 @@ public class LoginController extends BaseController {
 		String errInfo = "";
 		String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq313596790fh", "").replaceAll("QQ978336446fh", "").split(",fh,");
 		
-		if(null != KEYDATA && KEYDATA.length == 3){
+		if(null != KEYDATA && KEYDATA.length == 4){
 			//shiro管理的session
 			Subject currentUser = SecurityUtils.getSubject();  
 			Session session = currentUser.getSession();
@@ -105,8 +117,12 @@ public class LoginController extends BaseController {
 				String USERNAME = KEYDATA[0];
 				String PASSWORD  = KEYDATA[1];
 				pd.put("USERNAME", USERNAME);
+				//获取单位编码
+				String DWBM  = KEYDATA[3];
+				pd.put("DWBM", DWBM);
 				if(Tools.notEmpty(sessionCode) && sessionCode.equalsIgnoreCase(code)){
-					String passwd = new SimpleHash("SHA-1", USERNAME, PASSWORD).toString();	//密码加密
+					//String passwd = new SimpleHash("SHA-1", USERNAME, PASSWORD).toString();	//密码加密
+					String passwd = MD5.md5(PASSWORD);
 					pd.put("PASSWORD", passwd);
 					pd = userService.getUserByNameAndPwd(pd);
 					if(pd != null){
@@ -296,9 +312,10 @@ public class LoginController extends BaseController {
 	 * 用户注销
 	 * @param session
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="/logout")
-	public ModelAndView logout(){
+	public ModelAndView logout() throws Exception{
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		
@@ -327,6 +344,11 @@ public class LoginController extends BaseController {
 		pd.put("SYSNAME", Tools.readTxtFile(Const.SYSNAME)); //读取系统名称
 		mv.setViewName("system/admin/login");
 		mv.addObject("pd",pd);
+		//加入院名
+		Page  page = new Page();
+		page.setPd(pd);
+		List<PageData> departList = departService.list(page);
+		mv.addObject("departList",departList);
 		return mv;
 	}
 	

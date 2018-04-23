@@ -24,33 +24,52 @@
 
 	<div
 		style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
-		<div id="loginbox">
+		<canvas id="canvas" width="1366" height="319"></canvas>
+		<div id="loginbox" style="position:absolute;top:0;">
+		
 			<form action="" method="post" name="loginForm"
 				id="loginForm">
 				<div class="control-group normal_text">
 					<h3>
-						<img src="static/login/logo.png" alt="Logo" />
+						<!-- <img src="static/login/logo.png" alt="Logo" /> -->
+						黑龙江省人民检察院检察技术运维神器
 					</h3>
 				</div>
 				<div class="control-group">
 					<div class="controls">
 						<div class="main_input_box">
+							<!-- <span class="add-on bg_lg">
+							<i><img height="37" src="static/login/user.png" /></i>
+							</span> -->
+					 	<select class="" name="department" id="department" data-placeholder="请选择院名" style="height:30px;width:50%;">
+							<c:forEach items="${departList}" var="depart">
+								<option value="${depart.DWBM}">${depart.DWMC}</option>
+							</c:forEach>
+					  	</select>
+						</div>
+					</div>
+				</div>				
+				
+				<div class="control-group">
+					<div class="controls">
+						<div class="main_input_box">
 							<span class="add-on bg_lg">
 							<i><img height="37" src="static/login/user.png" /></i>
-							</span><input type="text" name="loginname" id="loginname" value="" placeholder="请输入用户名" />
+							</span><input type="text" name="loginname" id="loginname" value="admin" placeholder="请输入用户名" />
 						</div>
 					</div>
 				</div>
+				
 				<div class="control-group">
 					<div class="controls">
 						<div class="main_input_box">
 							<span class="add-on bg_ly">
 							<i><img height="37" src="static/login/suo.png" /></i>
-							</span><input type="password" name="password" id="password" placeholder="请输入密码" value="" />
+							</span><input type="password" name="password" id="password" placeholder="请输入密码" value="00230000" />
 						</div>
 					</div>
 				</div>
-				<div style="float:right;padding-right:10%;">
+				<!-- <div style="float:right;padding-right:10%;">
 					<div style="float: left;margin-top:3px;margin-right:2px;">
 						<font color="white">记住密码</font>
 					</div>
@@ -58,7 +77,7 @@
 						<input name="form-field-checkbox" id="saveid" type="checkbox"
 							onclick="savePaw();" style="padding-top:0px;" />
 					</div>
-				</div>
+				</div> -->
 				<div class="form-actions">
 					<div style="width:86%;padding-left:8%;">
 
@@ -87,30 +106,36 @@
 
 			<div class="controls">
 				<div class="main_input_box">
-					<font color="white"><span id="nameerr">Copyright © FH
-							2100</span></font>
+					<font color="white"><span id="nameerr">2018 & copyright; 黑龙江省人民检察院(张伟-1).</br>
+	                	联系方式:微信 226611936</span></font>
 				</div>
 			</div>
+			
 		</div>
+		
 	</div>
-	<div id="templatemo_banner_slide" class="container_wapper">
+	<!-- <div id="templatemo_banner_slide" class="container_wapper">
 		<div class="camera_wrap camera_emboss" id="camera_slide">
 			<div data-src="static/login/images/banner_slide_01.jpg"></div>
 			<div data-src="static/login/images/banner_slide_02.jpg"></div>
 			<div data-src="static/login/images/banner_slide_03.jpg"></div>
 		</div>
-		<!-- #camera_wrap_3 -->
-	</div>
-
+		#camera_wrap_3
+	</div> -->
+	<script src="static/js/earth/jquery-1.8.3.min.js"></script>
+	<script src="static/js/earth/bootstrap.min.js"></script>
+	<script type="text/javascript" src="static/js/earth/earth.js"></script>
+	
 	<script type="text/javascript">
 	
 		//服务器校验
 		function severCheck(){
+			console.log(1);
 			if(check()){
 				
 				var loginname = $("#loginname").val();
 				var password = $("#password").val();
-				var code = "qq313596790fh"+loginname+",fh,"+password+"QQ978336446fh"+",fh,"+$("#code").val();
+				var code = "qq313596790fh"+loginname+",fh,"+password+"QQ978336446fh"+",fh,"+$("#code").val()+",fh,"+$("#department").val();
 				$.ajax({
 					type: "POST",
 					url: 'login_login',

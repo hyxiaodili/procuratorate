@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DepartmentRealMapper">
+	
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into "T_AGGZTJ_DQ_3"(
+			"DWMC",	
+			"WTBM04_JCJS_TYSAH",	
+			"WTBM05_JCJS_TYSAH",	
+			"WTBM02_JCJS_TYSAH",	
+			"WTBM03_JCJS_TYSAH",	
+			"WTBM06_JCJS_TYSAH",	
+			"WTBM07_JCJS_TYSAH",	
+			"WTBM08_JCJS_TYSAH",	
+			"WTBM09_JCJS_TYSAH",	
+			"WTBM10_JCJS_TYSAH",	
+			"WTBM11_JCJS_TYSAH",	
+			"WTBM14_JCJS_TYSAH",	
+			"WTBM01_JCJS_TYSAH",	
+			"WTBM13_JCJS_TYSAH",	
+			"WTBM12_JCJS_TYSAH",	
+			"WTBM30_JCJS_TYSAH",	
+			"WTBM21_JCJS_TYSAH",	
+			"WTBM22_JCJS_TYSAH",	
+			"WTBM23_JCJS_TYSAH",	
+			"WTBM24_JCJS_TYSAH",	
+			"AGGZTJ_DQ_3_ID"
+		) values (
+			#{DWMC},	
+			#{WTBM04_JCJS_TYSAH},	
+			#{WTBM05_JCJS_TYSAH},	
+			#{WTBM02_JCJS_TYSAH},	
+			#{WTBM03_JCJS_TYSAH},	
+			#{WTBM06_JCJS_TYSAH},	
+			#{WTBM07_JCJS_TYSAH},	
+			#{WTBM08_JCJS_TYSAH},	
+			#{WTBM09_JCJS_TYSAH},	
+			#{WTBM10_JCJS_TYSAH},	
+			#{WTBM11_JCJS_TYSAH},	
+			#{WTBM14_JCJS_TYSAH},	
+			#{WTBM01_JCJS_TYSAH},	
+			#{WTBM13_JCJS_TYSAH},	
+			#{WTBM12_JCJS_TYSAH},	
+			#{WTBM30_JCJS_TYSAH},	
+			#{WTBM21_JCJS_TYSAH},	
+			#{WTBM22_JCJS_TYSAH},	
+			#{WTBM23_JCJS_TYSAH},	
+			#{WTBM24_JCJS_TYSAH},	
+			#{AGGZTJ_DQ_3_ID}
+		)
+	</insert>
+	
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from "T_AGGZTJ_DQ_3"
+		where 
+			"AGGZTJ_DQ_3_ID" = #{AGGZTJ_DQ_3_ID}
+	</delete>
+	
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update  "T_AGGZTJ_DQ_3"
+			set 
+				"DWMC" = #{DWMC},	
+				"WTBM04_JCJS_TYSAH" = #{WTBM04_JCJS_TYSAH},	
+				"WTBM05_JCJS_TYSAH" = #{WTBM05_JCJS_TYSAH},	
+				"WTBM02_JCJS_TYSAH" = #{WTBM02_JCJS_TYSAH},	
+				"WTBM03_JCJS_TYSAH" = #{WTBM03_JCJS_TYSAH},	
+				"WTBM06_JCJS_TYSAH" = #{WTBM06_JCJS_TYSAH},	
+				"WTBM07_JCJS_TYSAH" = #{WTBM07_JCJS_TYSAH},	
+				"WTBM08_JCJS_TYSAH" = #{WTBM08_JCJS_TYSAH},	
+				"WTBM09_JCJS_TYSAH" = #{WTBM09_JCJS_TYSAH},	
+				"WTBM10_JCJS_TYSAH" = #{WTBM10_JCJS_TYSAH},	
+				"WTBM11_JCJS_TYSAH" = #{WTBM11_JCJS_TYSAH},	
+				"WTBM14_JCJS_TYSAH" = #{WTBM14_JCJS_TYSAH},	
+				"WTBM01_JCJS_TYSAH" = #{WTBM01_JCJS_TYSAH},	
+				"WTBM13_JCJS_TYSAH" = #{WTBM13_JCJS_TYSAH},	
+				"WTBM12_JCJS_TYSAH" = #{WTBM12_JCJS_TYSAH},	
+				"WTBM30_JCJS_TYSAH" = #{WTBM30_JCJS_TYSAH},	
+				"WTBM21_JCJS_TYSAH" = #{WTBM21_JCJS_TYSAH},	
+				"WTBM22_JCJS_TYSAH" = #{WTBM22_JCJS_TYSAH},	
+				"WTBM23_JCJS_TYSAH" = #{WTBM23_JCJS_TYSAH},	
+				"WTBM24_JCJS_TYSAH" = #{WTBM24_JCJS_TYSAH},	
+			"AGGZTJ_DQ_3_ID" = "AGGZTJ_DQ_3_ID"
+			where 
+				"AGGZTJ_DQ_3_ID" = #{AGGZTJ_DQ_3_ID}
+	</update>
+	
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+			"DWMC",	
+			"WTBM04_JCJS_TYSAH",	
+			"WTBM05_JCJS_TYSAH",	
+			"WTBM02_JCJS_TYSAH",	
+			"WTBM03_JCJS_TYSAH",	
+			"WTBM06_JCJS_TYSAH",	
+			"WTBM07_JCJS_TYSAH",	
+			"WTBM08_JCJS_TYSAH",	
+			"WTBM09_JCJS_TYSAH",	
+			"WTBM10_JCJS_TYSAH",	
+			"WTBM11_JCJS_TYSAH",	
+			"WTBM14_JCJS_TYSAH",	
+			"WTBM01_JCJS_TYSAH",	
+			"WTBM13_JCJS_TYSAH",	
+			"WTBM12_JCJS_TYSAH",	
+			"WTBM30_JCJS_TYSAH",	
+			"WTBM21_JCJS_TYSAH",	
+			"WTBM22_JCJS_TYSAH",	
+			"WTBM23_JCJS_TYSAH",	
+			"WTBM24_JCJS_TYSAH",	
+			"AGGZTJ_DQ_3_ID"
+		from 
+			"T_AGGZTJ_DQ_3"
+		where 
+			"AGGZTJ_DQ_3_ID" = #{AGGZTJ_DQ_3_ID}
+	</select>
+	
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+				a."DWMC",	
+				a."WTBM04_JCJS_TYSAH",	
+				a."WTBM05_JCJS_TYSAH",	
+				a."WTBM02_JCJS_TYSAH",	
+				a."WTBM03_JCJS_TYSAH",	
+				a."WTBM06_JCJS_TYSAH",	
+				a."WTBM07_JCJS_TYSAH",	
+				a."WTBM08_JCJS_TYSAH",	
+				a."WTBM09_JCJS_TYSAH",	
+				a."WTBM10_JCJS_TYSAH",	
+				a."WTBM11_JCJS_TYSAH",	
+				a."WTBM14_JCJS_TYSAH",	
+				a."WTBM01_JCJS_TYSAH",	
+				a."WTBM13_JCJS_TYSAH",	
+				a."WTBM12_JCJS_TYSAH",	
+				a."WTBM30_JCJS_TYSAH",	
+				a."WTBM21_JCJS_TYSAH",	
+				a."WTBM22_JCJS_TYSAH",	
+				a."WTBM23_JCJS_TYSAH",	
+				a."WTBM24_JCJS_TYSAH",	
+				a."AGGZTJ_DQ_3_ID"
+		from 
+				"T_AGGZTJ_DQ_3" a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a."DWMC",	
+				a."WTBM04_JCJS_TYSAH",	
+				a."WTBM05_JCJS_TYSAH",	
+				a."WTBM02_JCJS_TYSAH",	
+				a."WTBM03_JCJS_TYSAH",	
+				a."WTBM06_JCJS_TYSAH",	
+				a."WTBM07_JCJS_TYSAH",	
+				a."WTBM08_JCJS_TYSAH",	
+				a."WTBM09_JCJS_TYSAH",	
+				a."WTBM10_JCJS_TYSAH",	
+				a."WTBM11_JCJS_TYSAH",	
+				a."WTBM14_JCJS_TYSAH",	
+				a."WTBM01_JCJS_TYSAH",	
+				a."WTBM13_JCJS_TYSAH",	
+				a."WTBM12_JCJS_TYSAH",	
+				a."WTBM30_JCJS_TYSAH",	
+				a."WTBM21_JCJS_TYSAH",	
+				a."WTBM22_JCJS_TYSAH",	
+				a."WTBM23_JCJS_TYSAH",	
+				a."WTBM24_JCJS_TYSAH",	
+				a."AGGZTJ_DQ_3_ID"
+		from 
+				"T_AGGZTJ_DQ_3" a
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from "T_AGGZTJ_DQ_3"
+		where 
+			"AGGZTJ_DQ_3_ID" in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>

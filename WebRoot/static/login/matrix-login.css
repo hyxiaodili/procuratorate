@@ -29,9 +29,9 @@ hr{ border-top-color:#dadada;}
 /*Metro Background color class*/
 .bg_lb{ background:#27a9e3;}
 .bg_db{ background:#2295c9;}
-.bg_lg{ background:#28b779;}
+.bg_lg{ background:#285277;}
 .bg_dg{ background:#28b779;}
-.bg_ly{ background:#ffb848;}
+.bg_ly{ background:#285277;}
 .bg_dy{ background:#da9628;}
 .bg_ls{ background:#2255a4;}
 .bg_lo{ background:#da542e;}
@@ -47,14 +47,14 @@ body {   padding: 0;    margin-top:0px;margin: 0px;}
 #loginbox { overflow: hidden !important; z-index: 100;  text-align: center;  position: relative; margin-top:10%;}
 
 /* #loginbox form{ width:100%; background:#2E363F; position:relative; top:0; left:0; } */
-#loginbox form{ width:100%; background-color: rgba(0, 0, 0, 0.5);  position:relative; top:0; left:0; }
+#loginbox form{ width:100%;   position:relative; top:0; left:0; }
 
 #loginbox .form-actions { padding: 14px 20px 15px;}
 #loginbox .form-actions .pull-left { margin-top:0px;}
 #loginbox form#loginform { z-index: 200; display:block;}
 #loginbox form#recoverform { z-index: 100;     display:none;}
 #loginbox form#recoverform .form-actions {    margin-top: 10px;}
-#loginbox .main_input_box { margin:0 auto; text-align:center; font-size:13px;}
+#loginbox .main_input_box { margin:0 auto; text-align:center; font-size:13px;width:50%;}
 #loginbox .main_input_box .add-on{  padding:9.6px 9px; *line-height:31px; color:#fff;  width:30px; display:inline-block;}
 #loginbox .main_input_box input{ height:30px; border:0px; display:inline-block; width:75%; line-height:28px;  margin-bottom:3px;}
 #loginbox .controls{ padding:0 20px;}
