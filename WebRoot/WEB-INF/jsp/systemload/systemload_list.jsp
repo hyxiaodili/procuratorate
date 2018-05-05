@@ -55,16 +55,16 @@
 				
 				<thead>
 					<tr>
-						<th class="center">
+						<!-- <th class="center">
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
-						<th class="center">序号</th>
+						<th class="center">序号</th> -->
 						<th class="center">单位名称</th>
 						<th class="center">登录人次</th>
 						<th class="center">日均登录人次</th>
 						<th class="center">用户数量</th>
 						<th class="center">管理员数量</th>
-						<th class="center">操作</th>
+						<!-- <th class="center">操作</th> -->
 					</tr>
 				</thead>
 										
@@ -76,18 +76,20 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<td class='center' style="width: 30px;">
+								<%-- <td class='center' style="width: 30px;">
 									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
 								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td>
+								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
 										<td>${var.DWMC}</td>
 										<td>${var.DLRC}</td>
 										<td>${var.DLRCRJ}</td>
 										<td>
-										<a href="<%=basePath%>systemload/listbyid.do?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.YHSL}</a>
+										<a href="<%=basePath%>systemload/listbyid?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.YHSL}</a>
 										</td>
-										<td><a>${var.GLYSL}</a></td>
-								<td style="width: 30px;" class="center">
+										<td>
+											<a href="<%=basePath%>systemload/listbyAdministratorcount?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.GLYSL}</a>
+										</td>
+								<%-- <td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
 										<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -105,7 +107,7 @@
 										</ul>
 										</div>
 									</div>
-								</td>
+								</td> --%>
 							</tr>
 						
 						</c:forEach>

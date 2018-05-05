@@ -22,6 +22,7 @@ import com.fh.controller.base.BaseController;
 import com.fh.entity.Page;
 import com.fh.service.casereal.CaseRealService;
 import com.fh.util.Const;
+import com.fh.util.DateUtil;
 import com.fh.util.PageData;
 
 /** 
@@ -47,15 +48,120 @@ public class CaseRealController extends BaseController {
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
 		try{
-			pd = this.getPageData();
 			page.setPd(pd);
-			List<PageData>	varList = caseRealService.list(page);	//列出AGGZTJ_DQ_3列表
+			List<PageData>	varList = caseRealService.listAll(pd);	//列出AGGZTJ_DQ_3列表
 			mv.setViewName("casereal/casereal_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
+	 * 超链接一级
+	 */
+	@RequestMapping(value="/listbyCasereal")
+	public ModelAndView listbyCasereal(Page page){
+		logBefore(logger, "列表AGGZTJ_DQ_3");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
+		try{
+			page.setPd(pd);
+			List<PageData>	varList = caseRealService.listbyCasereal(pd);	//列出AGGZTJ_DQ_3列表
+			mv.setViewName("casestandard/ajlxyj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
+	 * 单位名称超链接二级
+	 */
+	@RequestMapping(value="/listbyCaserealEJ")
+	public ModelAndView listbyCaserealEJ(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String DWBM = pd.getString("DWBM");
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
+		try {
+			List<PageData>	varList = caseRealService.listbyCaserealEJ(pd);	//根据ID读取
+			mv.setViewName("casestandard/ajlx_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
 			logger.error(e.toString(), e);
 		}
 		return mv;

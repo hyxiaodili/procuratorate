@@ -28,6 +28,7 @@ import com.fh.entity.Page;
 import com.fh.util.AppUtil;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.Const;
+import com.fh.util.DateUtil;
 import com.fh.util.PageData;
 import com.fh.util.Tools;
 import com.fh.util.Jurisdiction;
@@ -56,10 +57,28 @@ public class TechAssistController extends BaseController {
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
 		try{
-			pd = this.getPageData();
 			page.setPd(pd);
-			List<PageData>	varList = techAssistService.list(page);	//列出AGGZTJ_DQ_3列表
+			List<PageData>	varList = techAssistService.listAll(pd);	//列出AGGZTJ_DQ_3列表
 			mv.setViewName("techassist/techassist_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
@@ -69,6 +88,98 @@ public class TechAssistController extends BaseController {
 		}
 		return mv;
 	}
+	
+	/**
+	 * 单位名称超链接一级
+	 */
+	@RequestMapping(value="/listbyTechassist")
+	public ModelAndView listbyTechassist(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String DWBM = pd.getString("DWBM");
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
+		try {
+			List<PageData>	varList = techAssistService.listbyTechassist(pd);	//根据ID读取
+			mv.setViewName("techassist/jsxzyj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	/**
+	 * 单位名称超链接二级
+	 */
+	@RequestMapping(value="/listbyTechassistEJ")
+	public ModelAndView listbyTechassistEJ(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String DWBM = pd.getString("DWBM");
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
+		try {
+			List<PageData>	varList = techAssistService.listbyTechassistEJ(pd);	//根据ID读取
+			mv.setViewName("techassist/jsxz_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
 	/* ===============================权限================================== */
 	public Map<String, String> getHC(){
 		Subject currentUser = SecurityUtils.getSubject();  //shiro管理的session

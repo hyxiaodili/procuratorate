@@ -46,6 +46,7 @@
 					<c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
 					</c:if>
+					<td><a href="javascript:history.go(-1)" target=_self>返回</a></td>
 				</tr>
 			</table>
 			<!-- 检索  -->
@@ -55,15 +56,15 @@
 				
 				<thead>
 					<tr>
-						<th class="center">
+						<!-- <th class="center">
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
-						<th class="center">序号</th>
+						<th class="center">序号</th> -->
 						<th class="center">证书编号</th>
 						<th class="center">工号</th>
 						<th class="center">名称</th>
 						<th class="center">登录别名</th>
-						<th class="center">操作</th>
+						<!-- <th class="center">操作</th> -->
 					</tr>
 				</thead>
 										
@@ -75,15 +76,15 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<td class='center' style="width: 30px;">
+								<%-- <td class='center' style="width: 30px;">
 									<label><input type='checkbox' name='ids' value="${var.YHSL_ID}" /><span class="lbl"></span></label>
 								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td>
+								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
 										<td>${var.CAID}</td>
 										<td>${var.GH}</td>
 										<td>${var.MC}</td>
 										<td>${var.DLBM}</td>
-								<td style="width: 30px;" class="center">
+								<%-- <td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
 										<c:if test="${QX.edit != 1 && QX.del != 1 }">
@@ -101,7 +102,7 @@
 										</ul>
 										</div>
 									</div>
-								</td>
+								</td> --%>
 							</tr>
 						
 						</c:forEach>

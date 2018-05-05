@@ -53,6 +53,20 @@ public class VideoSyncService {
 	}
 	
 	/*
+	 *超链接一级
+	 */
+	public List<PageData> listbyVideosync(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("VideoSyncMapper.listbyVideosync", pd);
+	}
+	
+	/*
+	 *超链接二级
+	 */
+	public List<PageData> listbyVideosyncEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("VideoSyncMapper.listbyVideosyncEJ", pd);
+	}
+	
+	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{

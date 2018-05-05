@@ -32,8 +32,8 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td><input class="span10 date-picker" name="beginTime" id="beginTime" value="${pd.beginTime}" type="datetime" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
+					<td><input class="span10 date-picker" name="endTime" id="endTime" value="${pd.endTime}" type="datetime" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
 					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 							<option value=""></option>
@@ -55,10 +55,10 @@
 				
 				<thead>
 					<tr>
-						<th class="center">
+						<!-- <th class="center">
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
-						<th class="center">序号</th>
+						<th class="center">序号</th> -->
 						<th class="center">单位名称</th>
 						<th class="center">反贪污贿赂部门</th>
 						<th class="center">反渎职侵权部门</th>
@@ -90,30 +90,32 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<td class='center' style="width: 30px;">
+								<%-- <td class='center' style="width: 30px;">
 									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
 								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.DWMC}</td>
-										<td>${var.WTBM04_JCJS}</td>
-										<td>${var.WTBM05_JCJS}</td>
-										<td>${var.WTBM02_JCJS}</td>
-										<td>${var.WTBM03_JCJS}</td>
-										<td>${var.WTBM06_JCJS}</td>
-										<td>${var.WTBM07_JCJS}</td>
-										<td>${var.WTBM08_JCJS}</td>
-										<td>${var.WTBM09_JCJS}</td>
-										<td>${var.WTBM10_JCJS}</td>
-										<td>${var.WTBM11_JCJS}</td>
-										<td>${var.WTBM14_JCJS}</td>
-										<td>${var.WTBM01_JCJS}</td>
-										<td>${var.WTBM13_JCJS}</td>
-										<td>${var.WTBM12_JCJS}</td>
-										<td>${var.WTBM30_JCJS}</td>
-										<td>${var.WTBM21_JCJS}</td>
-										<td>${var.WTBM22_JCJS}</td>
-										<td>${var.WTBM23_JCJS}</td>
-										<td>${var.WTBM24_JCJS}</td>
+								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
+										<td>
+											<a href="<%=basePath%>departmentstandard/listbyEntrustdept?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}">${var.DWMC}</a>
+										</td>
+										<td>${var.WTBM04_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM05_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM02_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM03_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM06_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM07_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM08_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM09_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM10_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM11_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM14_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM01_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM13_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM12_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM30_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM21_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM22_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM23_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM24_JCJS_ZDYSJ}</td>
 							</tr>
 						
 						</c:forEach>

@@ -97,19 +97,76 @@
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
-		select
-				a."DWMC",	
-				a."TQWZ_JCJS1301",	
-				a."WZZXLX_JCJS1301",	
-				a."TGWZLX_JCJS1301",	
-				a."TGWZZP_JCJS1301",	
-				a."TQQTSTZL_JCJS1301",	
-				a."KYBL_JCJS1301",	
-				a."ZCSYBL_JCJS1301",	
-				a."QTWSCL_JCJS1301",	
-				a."AGGZTJ_DQ_3_ID"
-		from 
-				"T_AGGZTJ_DQ_3" a
+		 select a.dwbm, a.dwmc,
+		 nvl(tqwzaaaa_jcjs1301_zdysj,'0') tqwzaaaa_jcjs1301_zdysj,
+		 nvl(wzzxlxaa_jcjs1301_zdysj,'0') wzzxlxaa_jcjs1301_zdysj,
+		 nvl(tgwzlxaa_jcjs1301_zdysj,'0') tgwzlxaa_jcjs1301_zdysj,
+		 nvl(tgwzzpaa_jcjs1301_zdysj,'0') tgwzzpaa_jcjs1301_zdysj,
+		 nvl(tqqtstzl_jcjs1301_zdysj,'0') tqqtstzl_jcjs1301_zdysj, 	
+		 nvl(kyblaaaa_jcjs1301_zdysj,'0') kyblaaaa_jcjs1301_zdysj,
+		 nvl(zcsyblaa_jcjs1301_zdysj,'0') zcsyblaa_jcjs1301_zdysj,
+		 nvl(qtwsclaa_jcjs1301_zdysj,'0') qtwsclaa_jcjs1301_zdysj
+	   from t_aggztj_dq_3 a ,
+	   (select t.FQDWBM,
+	    sum(case when t.tqwzfs like '2301%' then t.bmsah end) tqwzaaaa_jcjs1301_zdysj,
+		sum(case when t.WZZXLXCS like '2302%' then t.bmsah end) wzzxlxaa_jcjs1301_zdysj,  
+	    sum(case when t.TGWZLXZLFS like '2303%' then t.bmsah end) tgwzlxaa_jcjs1301_zdysj, 
+	    sum(case when t.TGWZZPZLFS like '2304%' then t.bmsah end) tgwzzpaa_jcjs1301_zdysj,  
+	    sum(case when t.TGQTSTZLFS like '2305%' then t.bmsah end) tqqtstzl_jcjs1301_zdysj,  
+	    sum(case when t.KYBLFS like '2306%' then t.bmsah end) kyblaaaa_jcjs1301_zdysj,  
+	    sum(case when t.ZCSYBLFS like '2307%' then t.bmsah end) zcsyblaa_jcjs1301_zdysj,
+		sum(case when t.QTWSCLFS like '2307%' then t.bmsah end) qtwsclaa_jcjs1301_zdysj	
+	     from v_JS_KYJC t
+	    where t.tqwzfs is not null 
+	    and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+	    AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
+	    group by t.FQDWBM
+	   ) b
+	    where a.dwbm = substr(b.FQDWBM(+),1,4) order by DWBM asc
+	</select>
+	
+	<select id="listbyCheckcase" parameterType="pd" resultType="pd">
+		 select a.dwbm, a.dwmc,
+		 nvl(tqwzaaaa_jcjs1301_zdysj,'0') tqwzaaaa_jcjs1301_zdysj,
+		 nvl(wzzxlxaa_jcjs1301_zdysj,'0') wzzxlxaa_jcjs1301_zdysj,
+		 nvl(tgwzlxaa_jcjs1301_zdysj,'0') tgwzlxaa_jcjs1301_zdysj,
+		 nvl(tgwzzpaa_jcjs1301_zdysj,'0') tgwzzpaa_jcjs1301_zdysj,
+		 nvl(tqqtstzl_jcjs1301_zdysj,'0') tqqtstzl_jcjs1301_zdysj, 	
+		 nvl(kyblaaaa_jcjs1301_zdysj,'0') kyblaaaa_jcjs1301_zdysj,
+		 nvl(zcsyblaa_jcjs1301_zdysj,'0') zcsyblaa_jcjs1301_zdysj,
+		 nvl(qtwsclaa_jcjs1301_zdysj,'0') qtwsclaa_jcjs1301_zdysj
+	   from t_aggztj_dq_4 a ,
+	   (select t.FQDWBM,
+	    sum(case when t.tqwzfs like '2301%' then t.bmsah end) tqwzaaaa_jcjs1301_zdysj,
+		sum(case when t.WZZXLXCS like '2302%' then t.bmsah end) wzzxlxaa_jcjs1301_zdysj,  
+	    sum(case when t.TGWZLXZLFS like '2303%' then t.bmsah end) tgwzlxaa_jcjs1301_zdysj, 
+	    sum(case when t.TGWZZPZLFS like '2304%' then t.bmsah end) tgwzzpaa_jcjs1301_zdysj,  
+	    sum(case when t.TGQTSTZLFS like '2305%' then t.bmsah end) tqqtstzl_jcjs1301_zdysj,  
+	    sum(case when t.KYBLFS like '2306%' then t.bmsah end) kyblaaaa_jcjs1301_zdysj,  
+	    sum(case when t.ZCSYBLFS like '2307%' then t.bmsah end) zcsyblaa_jcjs1301_zdysj,
+		sum(case when t.QTWSCLFS like '2307%' then t.bmsah end) qtwsclaa_jcjs1301_zdysj	
+	     from v_JS_KYJC t
+	    where t.tqwzfs is not null 
+	    and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+	    AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
+	    group by t.FQDWBM
+	   ) b
+	    where a.dwbm = substr(b.FQDWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+	    order by DWBM asc
+	</select>
+	
+	<!-- 超链接 -->
+	<select id="listbyCheckcaseEJ" parameterType="pd" resultType="pd">
+		select t.cbrgh,t.cbr,sum(t.tqwzfs) tqwzfs,sum(t.WZZXLXCS)WZZXLXCS,sum(t.TGWZLXZLFS) TGWZLXZLFS
+		,sum(t.TGWZZPZLFS) TGWZZPZLFS,sum(t.TGQTSTZLFS)TGQTSTZLFS,sum(t.KYBLFS) KYBLFS
+		,sum(t.ZCSYBLFS)ZCSYBLFS,sum(t.QTWSCLFS)QTWSCLFS　
+		from v_JS_KYJC t 
+		where t.CBDW_BM like CONCAT(CONCAT('%', #{DWBM}),'%')
+		and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+		AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+		group by t.cbrgh,t.cbr order by t.cbrgh asc
 	</select>
 	
 	<!-- 批量删除 -->

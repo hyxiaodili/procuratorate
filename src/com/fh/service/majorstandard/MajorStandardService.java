@@ -66,5 +66,16 @@ public class MajorStandardService {
 		dao.delete("MajorStandardMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+	/*
+	 *
+	 */
+	public List<PageData> listbyInvolvemajor(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("MajorStandardMapper.listbyInvolvemajor", pd);
+	}
+	
+	public List<PageData> listbyInvolvemajorEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("MajorStandardMapper.listbyInvolvemajorEJ", pd);
+	}
+	
 }
 

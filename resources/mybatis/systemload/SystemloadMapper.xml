@@ -98,4 +98,17 @@
 		</foreach>
 	</delete>
 	
+	<!-- 通过ID获取数据 -->
+	<select id="findlistById" parameterType="pd" resultType="pd">
+		select caid,gh,mc,dlbm from v_yhsl  where 
+		dwbm LIKE CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		order by caid,gh asc
+	</select>
+
+	<select id="listbyAdministratorcount" parameterType="pd" resultType="pd">
+		select caid,gh,mc,dlbm 
+		from v_glysl 
+		where dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		order by caid,gh asc
+	</select>
 </mapper>

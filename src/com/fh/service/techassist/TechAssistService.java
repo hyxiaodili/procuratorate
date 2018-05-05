@@ -53,6 +53,16 @@ public class TechAssistService {
 	}
 	
 	/*
+	 *超链接
+	 */
+	public List<PageData> listbyTechassist(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("TechAssistMapper.listbyTechassist", pd);
+	}
+	public List<PageData> listbyTechassistEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("TechAssistMapper.listbyTechassistEJ", pd);
+	}
+	
+	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{

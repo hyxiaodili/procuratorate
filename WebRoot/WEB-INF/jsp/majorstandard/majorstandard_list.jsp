@@ -32,8 +32,8 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td><input class="span10 date-picker" name="beginTime" id="beginTime" value="${pd.beginTime}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
+					<td><input class="span10 date-picker" name="endTime" id="endTime" value="${pd.endTime}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
 					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 							<option value=""></option>
@@ -55,10 +55,10 @@
 				
 				<thead>
 					<tr>
-						<th class="center">
+						<!-- <th class="center">
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
-						<th class="center">序号</th>
+						<th class="center">序号</th> -->
 						<th class="center">单位名称</th>
 						<th class="center">法医临床</th>
 						<th class="center">法医病理</th>
@@ -86,26 +86,28 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<td class='center' style="width: 30px;">
+								<%-- <td class='center' style="width: 30px;">
 									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
 								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.DWMC}</td>
-										<td>${var.FYLC_JCJS}</td>
-										<td>${var.FYBL_JCJS}</td>
-										<td>${var.FYJS_JCJS}</td>
-										<td>${var.FYWZ_JCJS}</td>
-										<td>${var.FYDW_JCJS}</td>
-										<td>${var.WJJY_JCJS}</td>
-										<td>${var.HJJY_JCJS}</td>
-										<td>${var.WLWZ_JCJS}</td>
-										<td>${var.SXZL_JCJS}</td>
-										<td>${var.DZZJ_JCJS}</td>
-										<td>${var.SFKJ_JCJS}</td>
-										<td>${var.XLCS_JCJS}</td>
-										<td>${var.TBLX_JCJS}</td>
-										<td>${var.PG_JCJS}</td>
-										<td>${var.QT_JCJS}</td>
+								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
+										<td>
+											${var.DWMC}
+										</td>
+										<td>${var.FYLC_JCJS_ZDYSJ}</td>
+										<td>${var.FYBL_JCJS_ZDYSJ}</td>
+										<td>${var.FYJS_JCJS_ZDYSJ}</td>
+										<td>${var.FYWZ_JCJS_ZDYSJ}</td>
+										<td>${var.FYDW_JCJS_ZDYSJ}</td>
+										<td>${var.WJJY_JCJS_ZDYSJ}</td>
+										<td>${var.HJJY_JCJS_ZDYSJ}</td>
+										<td>${var.WLWZ_JCJS_ZDYSJ}</td>
+										<td>${var.SXZL_JCJS_ZDYSJ}</td>
+										<td>${var.DZZJ_JCJS_ZDYSJ}</td>
+										<td>${var.SFKJ_JCJS_ZDYSJ}</td>
+										<td>${var.XLCS_JCJS_ZDYSJ}</td>
+										<td>${var.TBLX_JCJS_ZDYSJ}</td>
+										<td>${var.PG_JCJS_ZDYSJ}</td>
+										<td>${var.QT_JCJS_ZDYSJ}</td>
 							</tr>
 						
 						</c:forEach>

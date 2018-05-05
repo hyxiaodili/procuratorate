@@ -59,11 +59,21 @@ public class SystemloadService {
 		return (PageData)dao.findForObject("SystemloadMapper.findById", pd);
 	}
 	
+	public  List<PageData> listbyAdministratorcount(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("SystemloadMapper.listbyAdministratorcount", pd);
+	}
+	
 	/*
 	* 批量删除
 	*/
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{
 		dao.delete("SystemloadMapper.deleteAll", ArrayDATA_IDS);
+	}
+	/*
+	* 通过id获取列表数据
+	*/
+	public  List<PageData> findlistById(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("YHSLMapper.findlistById", pd);
 	}
 	
 }

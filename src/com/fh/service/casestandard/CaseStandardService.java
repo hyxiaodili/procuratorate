@@ -33,6 +33,20 @@ public class CaseStandardService {
 	}
 	
 	/*
+	 *超链接
+	 */
+	public List<PageData> findlistByCasetype(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("CaseStandardMapper.findlistByCasetype", pd);
+	}
+	
+	/*
+	 *超链接
+	 */
+	public List<PageData> listbyidCasetypeEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("CaseStandardMapper.listbyidCasetypeEJ", pd);
+	}
+	
+	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{

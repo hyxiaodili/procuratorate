@@ -87,17 +87,69 @@
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
-		select
-				a."DWMC",	
-				a."TQWZ_JCJS1302",	
-				a."WZZXLX_JCJS1302",	
-				a."TGWZLX_JCJS1302",	
-				a."TGWZZP_JCJS1302",	
-				a."TQQTSTZL_JCJS1302",	
-				a."GZSM_JCJS1302",	
-				a."AGGZTJ_DQ_3_ID"
-		from 
-				"T_AGGZTJ_DQ_3" a
+		 select a.dwbm, a.dwmc,
+		 nvl(tqwzaaaa_jcjs1302_zdysj,'0') tqwzaaaa_jcjs1302_zdysj,
+		  nvl(wzzxlxaa_jcjs1302_zdysj,'0') wzzxlxaa_jcjs1302_zdysj,
+		 nvl(tgwzlxaa_jcjs1302_zdysj,'0') tgwzlxaa_jcjs1302_zdysj,
+		 nvl(tgwzzpaa_jcjs1302_zdysj,'0') tgwzzpaa_jcjs1302_zdysj,
+		 nvl(tqqtstzl_jcjs1302_zdysj,'0') tqqtstzl_jcjs1302_zdysj, 	
+		 nvl(gzsmaaaa_jcjs1302_zdysj,'0') gzsmaaaa_jcjs1302_zdysj
+	   from t_aggztj_dq_3 a ,
+	   (select t.FQDWBM,
+	    sum(case when t.tqwzfs like '2301%' then t.bmsah end) tqwzaaaa_jcjs1302_zdysj,
+		sum(case when t.WZZXLXCS like '2302%' then t.bmsah end) wzzxlxaa_jcjs1302_zdysj,  
+	    sum(case when t.TGWZLXFS like '2303%' then t.bmsah end) tgwzlxaa_jcjs1302_zdysj, 
+	    sum(case when t.TGWZZPFS like '2304%' then t.bmsah end) tgwzzpaa_jcjs1302_zdysj,  
+	    sum(case when t.TGQTSTZLFS like '2305%' then t.bmsah end) tqqtstzl_jcjs1302_zdysj,  
+	    sum(case when t.GZSMFS like '2306%' then t.bmsah end) gzsmaaaa_jcjs1302_zdysj
+	     from v_js_jsxz t
+	    where t.TQWZFS is not null 
+	    and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+	    AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
+	    group by t.FQDWBM
+	   ) b
+	    where a.dwbm = substr(b.FQDWBM(+),1,4) order by DWBM asc
+	</select>
+	
+	<!-- 超链接一级 -->
+	<select id="listbyTechassist" parameterType="pd" resultType="pd">
+		 select a.dwbm, a.dwmc,
+		 nvl(tqwzaaaa_jcjs1302_zdysj,'0') tqwzaaaa_jcjs1302_zdysj,
+		  nvl(wzzxlxaa_jcjs1302_zdysj,'0') wzzxlxaa_jcjs1302_zdysj,
+		 nvl(tgwzlxaa_jcjs1302_zdysj,'0') tgwzlxaa_jcjs1302_zdysj,
+		 nvl(tgwzzpaa_jcjs1302_zdysj,'0') tgwzzpaa_jcjs1302_zdysj,
+		 nvl(tqqtstzl_jcjs1302_zdysj,'0') tqqtstzl_jcjs1302_zdysj, 	
+		 nvl(gzsmaaaa_jcjs1302_zdysj,'0') gzsmaaaa_jcjs1302_zdysj
+	   from t_aggztj_dq_4 a ,
+	   (select t.FQDWBM,
+	    sum(case when t.tqwzfs like '2301%' then t.bmsah end) tqwzaaaa_jcjs1302_zdysj,
+		sum(case when t.WZZXLXCS like '2302%' then t.bmsah end) wzzxlxaa_jcjs1302_zdysj,  
+	    sum(case when t.TGWZLXFS like '2303%' then t.bmsah end) tgwzlxaa_jcjs1302_zdysj, 
+	    sum(case when t.TGWZZPFS like '2304%' then t.bmsah end) tgwzzpaa_jcjs1302_zdysj,  
+	    sum(case when t.TGQTSTZLFS like '2305%' then t.bmsah end) tqqtstzl_jcjs1302_zdysj,  
+	    sum(case when t.GZSMFS like '2306%' then t.bmsah end) gzsmaaaa_jcjs1302_zdysj
+	     from v_js_jsxz t
+	    where t.TQWZFS is not null 
+	    and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+	    AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
+	    group by t.FQDWBM
+	   ) b
+	    where a.dwbm = substr(b.FQDWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+	    order by DWBM asc
+	</select>
+	
+	<!-- 超链接二级 -->
+	<select id="listbyTechassistEJ" parameterType="pd" resultType="pd">
+		select t.cbrgh,t.cbr,sum(t.tqwzfs) tqwzfs,sum(t.wzzxlxcs) wzzxlxcs
+		,sum(t.tgwzlxfs) tgwzlxfs,sum(t.tgwzzpfs) tgwzzpfs,sum(t.tgqtstzlfs) tgqtstzlfs,sum(t.gzsmfs) gzsmfs　
+		from v_JS_JSXZ t 
+		where t.CBDW_BM like CONCAT(CONCAT('%', #{DWBM}),'%')
+		and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+		AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+		group by t.cbrgh,t.cbr  
+		order by t.cbrgh asc
 	</select>
 	
 	<!-- 批量删除 -->

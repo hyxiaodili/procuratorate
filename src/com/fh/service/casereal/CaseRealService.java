@@ -53,6 +53,17 @@ public class CaseRealService {
 	}
 	
 	/*
+	 *列表(全部)
+	 */
+	public List<PageData> listbyCasereal(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("CaseRealMapper.listbyCasereal", pd);
+	}
+	
+	public List<PageData> listbyCaserealEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("CaseRealMapper.listbyCaserealEJ", pd);
+	}
+	
+	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{

@@ -53,6 +53,19 @@ public class CheckCaseService {
 	}
 	
 	/*
+	 *超链接一级
+	 */
+	public List<PageData> listbyCheckcase(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("CheckCaseMapper.listbyCheckcase", pd);
+	}
+	/*
+	 *超链接二级
+	 */
+	public List<PageData> listbyCheckcaseEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("CheckCaseMapper.listbyCheckcaseEJ", pd);
+	}
+	
+	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{

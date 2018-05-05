@@ -27,6 +27,7 @@ import com.fh.entity.Page;
 import com.fh.service.videosync.VideoSyncService;
 import com.fh.util.AppUtil;
 import com.fh.util.Const;
+import com.fh.util.DateUtil;
 import com.fh.util.Jurisdiction;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.PageData;
@@ -53,15 +54,124 @@ public class VideoSyncController extends BaseController {
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
 		try{
-			pd = this.getPageData();
 			page.setPd(pd);
-			List<PageData>	varList = videoSyncService.list(page);	//列出AGGZTJ_DQ_3列表
+			List<PageData>	varList = videoSyncService.listAll(pd);	//列出AGGZTJ_DQ_3列表
 			mv.setViewName("videosync/videosync_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
+	 * 单位名称超链接一级
+	 */
+	@RequestMapping(value="/listbyVideosync")
+	public ModelAndView listbyVideosync(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String DWBM = pd.getString("DWBM");
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
+		try {
+			List<PageData>	varList = videoSyncService.listbyVideosync(pd);	//根据ID读取
+			mv.setViewName("videosync/tblylxyj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	/**
+	 * 单位名称超链接二级
+	 */
+	@RequestMapping(value="/listbyVideosyncEJ")
+	public ModelAndView listbyVideosyncEJ(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		
+		String DWBM = pd.getString("DWBM");
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		
+		if(beginTime != null && !"".equals(beginTime)){
+			pd.put("beginTime", beginTime);
+		}else {
+			beginTime = "2017-01-01 00:00:00";
+			pd.put("beginTime", beginTime);
+		}
+		
+		if(endTime != null && !"".equals(endTime)){
+			pd.put("endTime", endTime);
+		}else {
+			endTime = DateUtil.getDay() + " 23:59:59";
+			pd.put("endTime", endTime);
+		}
+		
+		try {
+			List<PageData>	varList = videoSyncService.listbyVideosyncEJ(pd);	//根据ID读取
+			mv.setViewName("videosync/tblylx_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
 			logger.error(e.toString(), e);
 		}
 		return mv;

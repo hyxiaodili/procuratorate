@@ -32,8 +32,8 @@
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
+					<td><input class="span10 date-picker" name="beginTime" id="beginTime" value="${pd.beginTime}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
+					<td><input class="span10 date-picker" name="endTime" id="endTime" value="${pd.endTime}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
 					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
 							<option value=""></option>
@@ -55,10 +55,10 @@
 				
 				<thead>
 					<tr>
-						<th class="center">
+						<!-- <th class="center">
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
-						<th class="center">序号</th>
+						<th class="center">序号</th> -->
 						<th class="center">单位名称</th>
 						<th class="center">提取物证(份)</th>
 						<th class="center">物证照相录像(次)</th>
@@ -77,17 +77,19 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<td class='center' style="width: 30px;">
+								<%-- <td class='center' style="width: 30px;">
 									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
 								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.DWMC}</td>
-										<td>${var.TQWZ_JCJS1302}</td>
-										<td>${var.WZZXLX_JCJS1302}</td>
-										<td>${var.TGWZLX_JCJS1302}</td>
-										<td>${var.TGWZZP_JCJS1302}</td>
-										<td>${var.TQQTSTZL_JCJS1302}</td>
-										<td>${var.GZSM_JCJS1302}</td>
+								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
+										<td>
+											<a href="<%=basePath%>techassist/listbyTechassist?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}">${var.DWMC}</a>
+										</td>
+										<td>${var.TQWZAAAA_JCJS1302_ZDYSJ}</td>
+										<td>${var.WZZXLXAA_JCJS1302_ZDYSJ}</td>
+										<td>${var.TGWZLXAA_JCJS1302_ZDYSJ}</td>
+										<td>${var.TGWZZPAA_JCJS1302_ZDYSJ}</td>
+										<td>${var.TQQTSTZL_JCJS1302_ZDYSJ}</td>
+										<td>${var.GZSMAAAA_JCJS1302_ZDYSJ}</td>
 							</tr>
 						
 						</c:forEach>

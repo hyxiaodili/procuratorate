@@ -60,6 +60,17 @@ public class MajorRealService {
 	}
 	
 	/*
+	 *
+	 */
+	public List<PageData> listbyMajorreal(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("MajorRealMapper.listbyMajorreal", pd);
+	}
+
+	public List<PageData> listbyMajorrealEj(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("MajorRealMapper.listbyMajorrealEJ", pd);
+	}
+	
+	/*
 	* 批量删除
 	*/
 	public void deleteAll(String[] ArrayDATA_IDS)throws Exception{

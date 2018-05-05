@@ -53,6 +53,17 @@ public class DepartmentRealService {
 	}
 	
 	/*
+	 *列表(全部)
+	 */
+	public List<PageData> listbyDepartmentreal(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("DepartmentRealMapper.listbyDepartmentreal", pd);
+	}
+	
+	public List<PageData> listbyDepartmentrealEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("DepartmentRealMapper.listbyDepartmentrealEJ", pd);
+	}
+	
+	/*
 	* 通过id获取数据
 	*/
 	public PageData findById(PageData pd)throws Exception{

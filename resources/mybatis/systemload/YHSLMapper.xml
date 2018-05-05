@@ -58,7 +58,8 @@
 	</select>
 	<!-- 通过ID获取数据 -->
 	<select id="findlistById" parameterType="pd" resultType="pd">
-		select caid,gh,mc,dlbm from v_yhsl  where 
+		select caid,gh,mc,dlbm 
+		from v_yhsl  where 
 		dwbm LIKE CONCAT(CONCAT('%', #{YHSL_ID}),'%')
 		order by caid,gh asc
 		

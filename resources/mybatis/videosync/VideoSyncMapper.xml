@@ -77,15 +77,61 @@
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
-		select
-				a."DWMC",	
-				a."LXZSC_JCJS1303",	
-				a."LZCS_JCJS1303",	
-				a."ZBSL_JCJS1303",	
-				a."FBSL_JCJS1303",	
-				a."AGGZTJ_DQ_3_ID"
-		from 
-				"T_AGGZTJ_DQ_3" a
+		select a.dwbm, a.dwmc,
+		nvl(lxzsc_jcjs1303_zdysj,'0') lxzsc_jcjs1303_zdysj,
+		nvl(lzcsa_jcjs1303_zdysj,'0') lzcsa_jcjs1303_zdysj,
+		nvl(zbsla_jcjs1303_zdysj,'0') zbsla_jcjs1303_zdysj,
+	    nvl(fbsla_jcjs1303_zdysj,'0') fbsla_jcjs1303_zdysj
+	   from t_aggztj_dq_3 a ,
+	   (select t.FQDWBM,
+	    round((24*(sum(lzjssj-lzkssj))),2) lxzsc_jcjs1303_zdysj,
+		count(*) lzcsa_jcjs1303_zdysj,  
+	    sum(t.zbsl) zbsla_jcjs1303_zdysj, 
+	    sum(t.fbsl) fbsla_jcjs1303_zdysj
+	     from v_JS_TBLYLXQK t
+	    where t.lzsc is not null 
+	    and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+	    AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
+	    group by t.FQDWBM
+	   ) b
+	    where a.dwbm = substr(b.FQDWBM(+),1,4) order by DWBM asc
+	</select>
+	
+	<!-- 超链接一级 -->
+	<select id="listbyVideosync" parameterType="pd" resultType="pd">
+		select a.dwbm, a.dwmc,
+		nvl(lxzsc_jcjs1303_zdysj,'0') lxzsc_jcjs1303_zdysj,
+		nvl(lzcsa_jcjs1303_zdysj,'0') lzcsa_jcjs1303_zdysj,
+		nvl(zbsla_jcjs1303_zdysj,'0') zbsla_jcjs1303_zdysj,
+	    nvl(fbsla_jcjs1303_zdysj,'0') fbsla_jcjs1303_zdysj
+	   from t_aggztj_dq_4 a ,
+	   (select t.FQDWBM,
+	    round((24*(sum(lzjssj-lzkssj))),2) lxzsc_jcjs1303_zdysj,
+		count(*) lzcsa_jcjs1303_zdysj,  
+	    sum(t.zbsl) zbsla_jcjs1303_zdysj, 
+	    sum(t.fbsl) fbsla_jcjs1303_zdysj
+	     from v_JS_TBLYLXQK t
+	    where t.lzsc is not null 
+	    and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+	    AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
+	    group by t.FQDWBM
+	   ) b
+	    where a.dwbm = substr(b.FQDWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+	    order by DWBM asc
+	</select>
+	
+	<!-- 超链接二级 -->
+	<select id="listbyVideosyncEJ" parameterType="pd" resultType="pd">
+		select t.cbrgh,t.cbr,round((24*(sum(t.lzjssj-t.lzkssj))),2) lzsc,count(*) lzcs
+		,sum(t.zbsl) zbsl,sum(t.fbsl) fbsl　
+		from v_js_tblylxqk t 
+		where t.CBDW_BM like CONCAT(CONCAT('%', #{DWBM}),'%')
+		and t.cjsj between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+		AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+		group by t.cbrgh,t.cbr 
+		order by t.cbrgh asc
 	</select>
 	
 	<!-- 批量删除 -->

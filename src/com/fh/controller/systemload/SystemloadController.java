@@ -29,7 +29,6 @@ import com.fh.util.AppUtil;
 import com.fh.util.ObjectExcelView;
 import com.fh.util.Const;
 import com.fh.util.PageData;
-import com.fh.util.Tools;
 import com.fh.util.Jurisdiction;
 import com.fh.service.systemload.SystemloadService;
 import com.fh.service.systemload.UsercountService;
@@ -124,7 +123,7 @@ public class SystemloadController extends BaseController {
 		return mv;
 	}
 	/**
-	 * 根据id查询列表
+	 * 根据用户数量查询
 	 */
 	@RequestMapping(value="/listbyid")
 	public ModelAndView listById(){
@@ -139,7 +138,33 @@ public class SystemloadController extends BaseController {
 			pd.put("YHSL_ID", YHSL_ID);
 		}
 		try {
-			List<PageData>	varList = usercountService.findlistById(pd);	//根据ID读取
+			List<PageData>	varList = systemloadService.findlistById(pd);	//根据ID读取
+			mv.setViewName("systemload/yhsl_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}						
+		return mv;
+	}
+	/**
+	 * 根据管理员数量查询
+	 */
+	@RequestMapping(value="/listbyAdministratorcount")
+	public ModelAndView listbyAdministratorcount(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String YHSL_ID = pd.getString("YHSL_ID");
+		
+		if(null != YHSL_ID && !"".equals(YHSL_ID)){
+			YHSL_ID = YHSL_ID.trim();
+			pd.put("YHSL_ID", YHSL_ID);
+		}
+		try {
+			List<PageData>	varList = systemloadService.listbyAdministratorcount(pd);	//根据ID读取
 			mv.setViewName("systemload/yhsl_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);

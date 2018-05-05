@@ -39,19 +39,75 @@
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
-		select
-				a."DWMC",	
-				a."KYJC_JCJS",	
-				a."JSXZ_JCJS",	
-				a."TBLY_JCJS",	
-				a."JYJD_JCJS",	
-				a."ZJSC_JCJS",	
-				a."JCJY_JCJS",	
-				a."SXYTTQ_JCJS",	
-				a."AGGZTJ_DQ_3_ID"
-		from 
-				"T_AGGZTJ_DQ_3" a
+		select a.dwbm,
+		a.dwmc,
+		nvl(kyjc_jcjs_zdysj,'0') kyjc_jcjs_zdysj,
+		nvl(jsxz_jcjs_zdysj,'0') jsxz_jcjs_zdysj,
+		nvl(tbly_jcjs_zdysj,'0') tbly_jcjs_zdysj,
+		nvl(jyjd_jcjs_zdysj,'0') jyjd_jcjs_zdysj,
+		nvl(zjsc_jcjs_zdysj,'0') zjsc_jcjs_zdysj,
+		nvl(jcjy_jcjs_zdysj,'0') jcjy_jcjs_zdysj, 
+		nvl(sxyttq_jcjs_zdysj,'0') sxyttq_jcjs_zdysj
+		from t_aggztj_dq_3 a,
+		(select
+		      t.DWBM,
+		      count(case when t.DWBM like '2301%' then t.bmsah end) kyjc_jcjs_zdysj,
+		      count(case when t.DWBM like '2302%' then t.bmsah end) jsxz_jcjs_zdysj,  
+		      count(case when t.DWBM like '2303%' then t.bmsah end) tbly_jcjs_zdysj, 
+		      count(case when t.DWBM like '2304%' then t.bmsah end) jyjd_jcjs_zdysj,  
+		      count(case when t.DWBM like '2305%' then t.bmsah end) zjsc_jcjs_zdysj,  
+		      count(case when t.DWBM like '2306%' then t.bmsah end) jcjy_jcjs_zdysj,  
+		      count(case when t.DWBM like '2307%' then t.bmsah end) sxyttq_jcjs_zdysj
+		from t_ajjbxx_jcjs t
+		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+		--and t.DWBM like substr(t.DWBM,1,4) || '%' 
+		group by t.DWBM 
+		) b
+		where a.dwbm = substr(b.DWBM(+),1,4) 
+		order by DWBM asc
 	</select>
 	
+	<!-- 超链接一级 -->
+	<select id="findlistByCasetype" parameterType="pd" resultType="pd">
+		select a.dwbm,
+		a.dwmc,
+		nvl(kyjc_jcjs_zdysj,'0') kyjc_jcjs_zdysj,
+		nvl(jsxz_jcjs_zdysj,'0') jsxz_jcjs_zdysj,
+		nvl(tbly_jcjs_zdysj,'0') tbly_jcjs_zdysj,
+		nvl(jyjd_jcjs_zdysj,'0') jyjd_jcjs_zdysj,
+		nvl(zjsc_jcjs_zdysj,'0') zjsc_jcjs_zdysj,
+		nvl(jcjy_jcjs_zdysj,'0') jcjy_jcjs_zdysj, 
+		nvl(sxyttq_jcjs_zdysj,'0') sxyttq_jcjs_zdysj
+		from t_aggztj_dq_4 a,
+		(select
+		      t.DWBM,
+		      count(case when t.DWBM like '230101%' then t.bmsah end) kyjc_jcjs_zdysj,
+		      count(case when t.DWBM like '230202%' then t.bmsah end) jsxz_jcjs_zdysj, 
+		      count(case when t.DWBM like '230303%' then t.bmsah end) tbly_jcjs_zdysj,
+		      count(case when t.DWBM like '230404%' then t.bmsah end) jyjd_jcjs_zdysj,  
+		      count(case when t.DWBM like '230505%' then t.bmsah end) zjsc_jcjs_zdysj,
+		      count(case when t.DWBM like '230606%' then t.bmsah end) jcjy_jcjs_zdysj, 
+		      count(case when t.DWBM like '230707%' then t.bmsah end) sxyttq_jcjs_zdysj
+		from t_ajjbxx_jcjs t
+		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+		--and t.DWBM like substr(t.DWBM,1,4) || '%' 
+		group by t.DWBM 
+		) b
+		where a.dwbm = substr(b.DWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+		order by DWBM asc
+	</select>
 	
+	<!-- 超链接二级 -->
+	<select id="listbyidCasetypeEJ" parameterType="pd" resultType="pd">
+		 select t.cbrgh, t.cbr, t.ajlb_mc, count(t.bmsah) sl
+		 from t_ajjbxx_jcjs t
+		 where t.DWBM like CONCAT(CONCAT('%', #{DWBM}),'%')
+		 and t.slrq between
+		       to_date(#{beginTime,jdbcType=VARCHAR}, 'yyyy-mm-dd hh24:mi:ss') AND
+		       to_date(#{endTime,jdbcType=VARCHAR}, 'yyyy-mm-dd hh24:mi:ss')
+		 group by t.cbrgh, t.cbr, t.ajlb_bm, t.ajlb_mc
+		 order by t.cbrgh, t.ajlb_bm asc
+	</select>
 </mapper>

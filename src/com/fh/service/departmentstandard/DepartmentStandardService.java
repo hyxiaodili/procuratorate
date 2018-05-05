@@ -53,6 +53,15 @@ public class DepartmentStandardService {
 		return (List<PageData>)dao.findForList("DepartmentStandardMapper.listAll", pd);
 	}
 	
+	
+	public List<PageData> findlistByEntrustdept(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("DepartmentStandardMapper.findlistByEntrustdept", pd);
+	}
+
+	public List<PageData> listbyEntrustdeptEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("DepartmentStandardMapper.listbyEntrustdeptEJ", pd);
+	}
+	
 	/*
 	* 通过id获取数据
 	*/
