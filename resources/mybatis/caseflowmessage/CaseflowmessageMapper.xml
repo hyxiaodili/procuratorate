@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CaseflowmessageMapper">
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.SJMC,	
+				a.SJSL
+		from 
+				T_SJLX a
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="searching" parameterType="pd" resultType="pd">
+		select t.bmsah,t.dqjd,t.dwmc,t.dqcbbmmc,t.dqbadymc,t.lcslbh,t.lcsljdbh,t.lcjdmc,t.jdjrsj,jdlksj,t.jdzxzgh,t.jdzxz,t.jdzxzdlbm 
+		from V_SLJD t   
+		where t.bmsah is not null 
+		and t.bmsah like CONCAT(CONCAT('%', #{field1}),'%') 
+		ORDER BY t.lcslbh,t.lcsljdbh
+	</select>
+	
+</mapper>

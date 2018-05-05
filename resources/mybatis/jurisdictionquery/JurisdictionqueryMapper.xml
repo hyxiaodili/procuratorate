@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="JurisdictionqueryMapper">
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+				a.SJMC,	
+				a.SJSL
+		from 
+				T_SJLX a
+	</select>
+	
+	<!-- 待分配案件检索 -->
+	<select id="searching" parameterType="pd" resultType="pd">
+		select dwmc,bmmc,jsmc,dlbm from V_QX_1000000002000004 
+		where dwbm like CONCAT(CONCAT('%', #{field1}),'%')
+		order by dwbm,bmbm,jsbm,dlbm asc
+	</select>
+	
+	<!-- 确定承办人 -->
+	<select id="searchingForAgent" parameterType="pd" resultType="pd">
+		select dwmc,bmmc,jsmc,dlbm from V_QX_1000000002000003 
+		where dwbm like CONCAT(CONCAT('%', #{field1}),'%')
+		order by dwbm,bmbm,jsbm,dlbm asc
+	</select>
+	
+	<!-- 待接收移送文书 -->
+	<select id="searchingForWrit" parameterType="pd" resultType="pd">
+		select dwmc,bmmc,jsmc,dlbm from V_QX_1000000002000006 
+		where dwbm like CONCAT(CONCAT('%', #{field1}),'%')
+		order by dwbm,bmbm,jsbm,dlbm asc
+	</select>
+	
+	<!-- 待批案件 -->
+	<select id="searchingForCase" parameterType="pd" resultType="pd">
+		select dwmc,bmmc,jsmc,dlbm from V_QX_1000000002000002 
+		where dwbm like CONCAT(CONCAT('%', #{field1}),'%')
+		order by dwbm,bmbm,jsbm,dlbm asc
+	</select>
+	
+	<!-- 待接收反馈 -->
+	<select id="searchingForFeedback" parameterType="pd" resultType="pd">
+		select dwmc,bmmc,jsmc,dlbm from V_QX_1000000002000007 
+		where dwbm like CONCAT(CONCAT('%', #{field1}),'%')
+		order by dwbm,bmbm,jsbm,dlbm asc
+	</select>
+	
+</mapper>
