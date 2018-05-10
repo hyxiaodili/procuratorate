@@ -37,7 +37,7 @@ import com.fh.util.RightsHelper;
 import com.fh.util.Tools;
 import com.fh.util.MD5;;
 /*
- * 总入口
+ * 总入口 标注
  */
 @Controller
 public class LoginController extends BaseController {
