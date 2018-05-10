@@ -16,5 +16,6 @@ package com.fh.entity;
 public class Test2 {
 public static void main(String[] args) {
 	System.err.println(456);
+	System.err.println(789);
 }
 }
