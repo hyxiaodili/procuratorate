@@ -44,7 +44,7 @@
 				<c:if test="${menu.hasMenu}">
 				<li id="lm${menu.MENU_ID }">
 					  <a style="cursor:pointer;" class="dropdown-toggle" >
-						<i class="${menu.MENU_ICON == null ? 'icon-desktop' : menu.MENU_ICON}"></i>
+						<i class="${menu.MENU_ICON == null ? '' : menu.MENU_ICON}"></i>
 						<span>${menu.MENU_NAME }</span>
 						<b class="arrow icon-angle-down"></b>
 					  </a>

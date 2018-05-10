@@ -6,7 +6,7 @@
 			  <ul class="nav ace-nav pull-right">
 			  
 			  
-					<li class="grey">
+					<!-- <li class="grey">
 						<a href="javascript:alert('预留功能,待开发');" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-tasks"></i>
 							<span class="badge">1</span>
@@ -130,19 +130,19 @@
 							</li>									
 	
 						</ul>
-					</li>
+					</li> 
 					
 					
 					<li class="purple" onclick="creatw();">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-bell-alt icon-animated-bell icon-only"></i>
 						</a>
-					</li>
+					</li>-->
 					
 					
 					<li class="light-blue user-profile">
 						<a class="user-menu dropdown-toggle" href="javascript:;" data-toggle="dropdown">
-							<img alt="FH" src="static/avatars/user.jpg" class="nav-user-photo" />
+							<!-- <img alt="FH" src="static/avatars/user.jpg" class="nav-user-photo" /> -->
 							<span id="user_info">
 							</span>
 							<i class="icon-caret-down"></i>

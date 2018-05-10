@@ -32,7 +32,7 @@
 				<div class="control-group normal_text">
 					<h3>
 						<!-- <img src="static/login/logo.png" alt="Logo" /> -->
-						黑龙江省人民检察院检察技术运维神器
+						黑龙江省人民检察院</br>检察技术运维神器
 					</h3>
 				</div>
 				<div class="control-group">
@@ -41,7 +41,7 @@
 							<!-- <span class="add-on bg_lg">
 							<i><img height="37" src="static/login/user.png" /></i>
 							</span> -->
-					 	<select class="" name="department" id="department" data-placeholder="请选择院名" style="height:30px;width:50%;">
+					 	<select class="" name="department" id="department" data-placeholder="请选择院名" style="height:50px;width:100%;">
 							<c:forEach items="${departList}" var="depart">
 								<option value="${depart.DWBM}">${depart.DWMC}</option>
 							</c:forEach>
@@ -53,9 +53,7 @@
 				<div class="control-group">
 					<div class="controls">
 						<div class="main_input_box">
-							<span class="add-on bg_lg">
-							<i><img height="37" src="static/login/user.png" /></i>
-							</span><input type="text" name="loginname" id="loginname" value="admin" placeholder="请输入用户名" />
+							<input type="text" name="loginname" id="loginname" value="admin" placeholder="请输入用户名"  style="height:30px;width:100%;"/>
 						</div>
 					</div>
 				</div>
@@ -63,9 +61,7 @@
 				<div class="control-group">
 					<div class="controls">
 						<div class="main_input_box">
-							<span class="add-on bg_ly">
-							<i><img height="37" src="static/login/suo.png" /></i>
-							</span><input type="password" name="password" id="password" placeholder="请输入密码" value="00230000" />
+							<input type="password" name="password" id="password" placeholder="请输入密码" value="00230000"  style="height:30px;width:100%;"/>
 						</div>
 					</div>
 				</div>
@@ -106,8 +102,7 @@
 
 			<div class="controls">
 				<div class="main_input_box">
-					<font color="white"><span id="nameerr">2018 & copyright; 黑龙江省人民检察院(张伟-1).</br>
-	                	联系方式:微信 226611936</span></font>
+					<font color="white"><span id="nameerr">2018 & copyright; 黑龙江省人民检察院(张伟-1).联系方式:微信 15245085070</span></font>
 				</div>
 			</div>
 			
