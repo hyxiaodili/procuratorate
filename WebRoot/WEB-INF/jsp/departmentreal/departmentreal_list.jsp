@@ -95,27 +95,27 @@
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
 										<td>
-											<a href="<%=basePath%>departmentreal/listbyDepartmentreal?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}">${var.DWMC}</a>
+											<a href="<%=basePath%>departmentreal/listbyDepartmentreal?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}&DWMC=${var.DWMC}">${var.DWMC}</a>
 										</td>
-										<td>${var.WTBM04_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM05_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM02_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM03_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM06_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM07_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM08_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM09_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM10_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM11_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM14_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM01_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM13_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM12_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM30_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM21_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM22_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM23_JCJS_ZDYSJ}</td>
-										<td>${var.WTBM24_JCJS_ZDYSJ}</td>
+										<td>${var.WTBM04_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM05_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM02_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM03_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM06_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM07_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM08_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM09_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM10_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM11_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM14_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM01_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM13_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM12_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM30_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM21_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM22_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM23_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.WTBM24_JCJS_TYSAH_ZDYSJ}</td>
 							</tr>
 						
 						</c:forEach>
@@ -137,13 +137,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

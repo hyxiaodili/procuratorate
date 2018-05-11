@@ -93,6 +93,12 @@ public class CaseRealController extends BaseController {
 		
 		String beginTime = pd.getString("beginTime");
 		String endTime = pd.getString("endTime");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(beginTime != null && !"".equals(beginTime)){
 			pd.put("beginTime", beginTime);
@@ -111,7 +117,7 @@ public class CaseRealController extends BaseController {
 		try{
 			page.setPd(pd);
 			List<PageData>	varList = caseRealService.listbyCasereal(pd);	//列出AGGZTJ_DQ_3列表
-			mv.setViewName("casestandard/ajlxyj_list");
+			mv.setViewName("casereal/ajlxyj_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
@@ -132,6 +138,12 @@ public class CaseRealController extends BaseController {
 		pd = this.getPageData();
 		
 		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();
@@ -157,7 +169,7 @@ public class CaseRealController extends BaseController {
 		
 		try {
 			List<PageData>	varList = caseRealService.listbyCaserealEJ(pd);	//根据ID读取
-			mv.setViewName("casestandard/ajlx_list");
+			mv.setViewName("casereal/ajlx_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限

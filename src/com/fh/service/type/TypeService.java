@@ -51,6 +51,10 @@ public class TypeService {
 		return (List<PageData>)dao.findForList("TypeMapper.listAll", pd);
 	}
 	
+	public List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("TypeMapper.listbyUnitname", pd);
+	}
+	
 	/*
 	* 通过id获取数据
 	*/

@@ -55,10 +55,6 @@
 				
 				<thead>
 					<tr>
-						<!-- <th class="center">
-						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
-						</th>
-						<th class="center">序号</th> -->
 						<th class="center">单位名称</th>
 						<th class="center">勘验检查</th>
 						<th class="center">技术协助</th>
@@ -78,20 +74,16 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<%-- <td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
-								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
 										<td>
-											<a href="<%=basePath%>casereal/listbyCasereal?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}">${var.DWMC}</a>
+											<a href="<%=basePath%>casereal/listbyCasereal?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}&DWMC=${var.DWMC}">${var.DWMC}</a>
 										</td>
-										<td>${var.KYJC_JCJS_ZDYSJ}</td>
-										<td>${var.JSXZ_JCJS_ZDYSJ}</td>
-										<td>${var.TBLY_JCJS_ZDYSJ}</td>
-										<td>${var.JYJD_JCJS_ZDYSJ}</td>
-										<td>${var.ZJSC_JCJS_ZDYSJ}</td>
-										<td>${var.JCJY_JCJS_ZDYSJ}</td>
-										<td>${var.SXYTTQ_JCJS_ZDYSJ}</td>
+										<td>${var.KYJC_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.JSXZ_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.TBLY_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.JYJD_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.ZJSC_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.JCJY_JCJS_TYSAH_ZDYSJ}</td>
+										<td>${var.SXYTTQ_JCJS_TYSAH_ZDYSJ}</td>
 							</tr>
 						
 						</c:forEach>
@@ -113,13 +105,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

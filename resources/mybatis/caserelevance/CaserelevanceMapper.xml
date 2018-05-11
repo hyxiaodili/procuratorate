@@ -68,6 +68,7 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
+				a.DWBM,
 				a.DWMC,	
 				a.SAAJGL_JCJS,	
 				a.TAAJGL_JCJS,	
@@ -86,17 +87,24 @@
 		</foreach>
 	</delete>
 	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select dwbm,dwmc,saajgl_jcjs,taajgl_jcjs 
+		from T_AGGZTJ_DQ_4 t 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
+		order by dwbm asc
+	</select>
+	
 	<select id="listbySourcecase" parameterType="pd" resultType="pd">
 		select yaj_cbdw_mc,yaj_ajlb_mc,yaj_tysah,yaj_bmsah,cjsj,glaj_cbdw_mc,glaj_ajlb_mc,glaj_tysah,glaj_bmsah　
 		from v_ajtagl 
-		where yaj_cbdw_bm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		where yaj_cbdw_bm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by yaj_ajlb_bm,yaj_bmsah,glaj_ajlb_bm,glaj_bmsah,cjsj
 	</select>
 	
 	<select id="listbyRelevancecase" parameterType="pd" resultType="pd">
 		select yaj_cbdw_mc,yaj_ajlb_mc,yaj_tysah,yaj_bmsah,cjsj,glaj_cbdw_mc,glaj_ajlb_mc,glaj_tysah,glaj_bmsah　
 		from v_ajtagl 
-		where glaj_cbdw_bm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		where glaj_cbdw_bm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by yaj_ajlb_bm,yaj_bmsah,glaj_ajlb_bm,glaj_bmsah,cjsj
 	</select>
 	

@@ -66,6 +66,10 @@ public class DeportationService {
 		dao.delete("DeportationMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+	public  List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("DeportationMapper.listbyUnitname", pd);
+	}
+	
 	public  List<PageData> listbySendthecase(PageData pd)throws Exception{
 		return  (List<PageData>)dao.findForList("DeportationMapper.listbySendthecase", pd);
 	}

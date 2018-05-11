@@ -76,14 +76,16 @@
 		a.dwmc,
 		nvl(ajsl_zdysj,'0') ajsl_zdysj,
 		nvl(ajbj_zdysj,'0') ajbj_zdysj,
+		nvl(ajnwgk_zdysj,'0') ajnwgk_zdysj,
 		nvl(ajsc_zdysj,'0') ajsc_zdysj
 		from t_aggztj_dq_3 a,
 		(select
 		      t.DWBM,
 		      count(t.bmsah) ajsl_zdysj,
 			  count(distinct t.bmsah) ajbj_zdysj,
+			  count(distinct k.bmsah) ajnwgk_zdysj,
 			  count(distinct d.bmsah) ajsc_zdysj
-		from v_ajjbxx t,v_ajsc d
+		from v_ajjbxx t,v_ajsc d,v_ajgk k
 		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
 					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
 		--and t.DWBM like substr(t.DWBM,1,4) || '%' 
@@ -99,14 +101,16 @@
 		a.dwmc,
 		nvl(ajsl_zdysj,'0') ajsl_zdysj,
 		nvl(ajbj_zdysj,'0') ajbj_zdysj,
+		nvl(ajnwgk_zdysj,'0') ajnwgk_zdysj,
 		nvl(ajsc_zdysj,'0') ajsc_zdysj
 		from t_aggztj_dq_4 a,
 		(select
 		      t.DWBM,
 		      count(t.bmsah) ajsl_zdysj,
 			  count(distinct t.bmsah) ajbj_zdysj,
+			  count(distinct k.bmsah) ajnwgk_zdysj,
 			  count(distinct d.bmsah) ajsc_zdysj
-		from v_ajjbxx t,v_ajsc d
+		from v_ajjbxx t,v_ajsc d,v_ajgk k
 		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
 					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
 		--and t.DWBM like substr(t.DWBM,1,4) || '%' 
@@ -114,6 +118,7 @@
 		) b
 		where a.dwbm = substr(b.DWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by DWBM asc
+		
 	</select>
 	
 	<!-- 超链接2一级 -->
@@ -122,14 +127,16 @@
 		a.dwmc,
 		nvl(ajsl_zdysj,'0') ajsl_zdysj,
 		nvl(ajbj_zdysj,'0') ajbj_zdysj,
+		nvl(ajnwgk_zdysj,'0') ajnwgk_zdysj,
 		nvl(ajsc_zdysj,'0') ajsc_zdysj
 		from t_aggztj_dq_4 a,
 		(select
 		      t.DWBM,
 		      count(t.bmsah) ajsl_zdysj,
 			  count(distinct t.bmsah) ajbj_zdysj,
+			  count(distinct k.bmsah) ajnwgk_zdysj,
 			  count(distinct d.bmsah) ajsc_zdysj
-		from v_ajjbxx t,v_ajsc d
+		from v_ajjbxx t,v_ajsc d,v_ajgk k
 		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
 					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
 		--and t.DWBM like substr(t.DWBM,1,4) || '%' 

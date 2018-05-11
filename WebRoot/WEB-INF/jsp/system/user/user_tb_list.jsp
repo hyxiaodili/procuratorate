@@ -51,7 +51,7 @@
 			<c:when test="${not empty userList}">
 				<c:if test="${QX.cha == 1 }">
 				<c:forEach items="${userList}" var="user" varStatus="vs">
-				<tr>
+				<tr id="tr">
 					<td class='center' style="width: 30px;">
 						<c:if test="${user.USERNAME != 'admin'}"><label><input type='checkbox' name='ids' value="${user.USER_ID }"/><span class="lbl"></span></label></c:if>
 						<c:if test="${user.USERNAME == 'admin'}"><label><input type='checkbox' disabled="disabled" /><span class="lbl"></span></label></c:if>
@@ -150,25 +150,29 @@
 		<script type="text/javascript">
 		$(top.hangge());
 		$(function() {
-			var oTable1 = $('#table_report').dataTable( {
-			"aoColumns": [
-		      { "bSortable": false },
-		      null, null,null, null, null,
-			  { "bSortable": false }
-			] } );
-			
-			
-			$('table th input:checkbox').on('click' , function(){
-				var that = this;
-				$(this).closest('table').find('tr > td:first-child input:checkbox')
-				.each(function(){
-					this.checked = that.checked;
-					$(this).closest('tr').toggleClass('selected');
-				});
+			var i = $('#tr');
+			if(i.length > 0){
+				var oTable1 = $('#table_report').dataTable( {
+					"aoColumns": [
+				      { "bSortable": false },
+				      null, null,null, null, null,
+					  { "bSortable": false },
+					] } );
 					
-			});
-			$('[data-rel=tooltip]').tooltip();
+					
+					$('table th input:checkbox').on('click' , function(){
+						var that = this;
+						$(this).closest('table').find('tr > td:first-child input:checkbox')
+						.each(function(){
+							this.checked = that.checked;
+							$(this).closest('tr').toggleClass('selected');
+						});
+							
+					});
+					$('[data-rel=tooltip]').tooltip();
+			}
 		})
+
 		
 		//检索
 		function search(){

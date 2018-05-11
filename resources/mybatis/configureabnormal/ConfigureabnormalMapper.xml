@@ -93,6 +93,7 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
+				a.DWBM,
 				a.DWMC,	
 				a.DWJCWPZ_JCJS,	
 				a.AJSLWPZ_JCJS,	
@@ -104,6 +105,8 @@
 				a.AGGZTJ_DQ_3_ID
 		from 
 				T_AGGZTJ_DQ_3 a
+		order by DWBM<!-- ,DWMC,DWJCWPZ_JCJS,AJSLWPZ_JCJS,DWYHWPZ_JCJS
+					,AJYHWPZ_JCJS,WSYHWPZ_JCJS,WSZDSPJSWPZ_JCJS,WSQYJSWPZ_JCJS -->
 	</select>
 	
 	<!-- 批量删除 -->
@@ -116,51 +119,59 @@
 		</foreach>
 	</delete>
 	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select dwbm,dwmc,dwjcwpz_jcjs,ajslwpz_jcjs,dwyhwpz_jcjs,ajyhwpz_jcjs
+				,wsyhwpz_jcjs,wszdspjswpz_jcjs,wsqyjswpz_jcjs 
+		from T_AGGZTJ_DQ_4 t 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+		order by dwbm asc
+	</select>
+	
 	<select id="listbyUnitforshort" parameterType="pd" resultType="pd">
 		select t.dwmc,t.dwjcbz,t.dwjc 
 		from v_dwjccy t 
-		where t.dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 	</select>
 	
 	<select id="listbyUnitno" parameterType="pd" resultType="pd">
 		select t.dwmc,t.yhlxmc,t.dwjcbz,t.dwjc,t.yhjcbz,t.yhjc 
 		from T_DWYHWPZ t 
-		where t.dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by t.dwbm,t.yhlx
 	</select>
 	
 	<select id="listbyToacceptthewizard" parameterType="pd" resultType="pd">
 		SELECT dwmc,ywmc,ajlbmc,slbh,slmc,sllb,slwz,fpwz,sfsdfl,sfsdfp,lcmbmc,lcclfs,lcclqk,flfs,sfzdqdcbr,zdqdcbrsj 
 		from T_AJSLWPZHBZ t 
-		WHERE t.dwbm= #{YHSL_ID}
+		WHERE t.dwbm= #{DWBM}
 		order by ajlbbm,slbh,dwmc
 	</select>
 	
 	<select id="listbyCaseno" parameterType="pd" resultType="pd">
 		select ywmc,ajmc,ajlbsxmc 
 		from T_AJYHWPZ   
-		where dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		where dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by ajbm
 	</select>
 	
 	<select id="listbyWritno" parameterType="pd" resultType="pd">
 		select ywmc,wsbm,wsmc,wsjh 
 		from T_WSYHWPZ  
-		where dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		where dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by ywbm,wsbm
 	</select>
 	
 	<select id="listbyMinimum" parameterType="pd" resultType="pd">
 		select ywmc,wsbm,wsmc,wszdspjs 
 		from T_WSZDSPJSWPZ 
-		where dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		where dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by wszdspjs,ywbm,wsbm
 	</select>
 	
 	<select id="listbyZonecontrol" parameterType="pd" resultType="pd">
 		select ywmc,wsbm,wsmc 
 		from T_WSQYJSWPZ 
-		where dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		where dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by ywbm,wsbm
 	</select>
 	

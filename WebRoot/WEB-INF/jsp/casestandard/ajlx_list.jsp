@@ -46,21 +46,22 @@
 					<c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
 					</c:if>
-					<!-- <td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="javascript:history.go(-1);"  title="返回"><i id="nav-search-icon" class="icon-search"></i></button></td> -->
-					<td><a href="javascript:history.go(-1)" target=_self>返回</a></td>
+					<td style="vertical-align:top;"><a class="btn btn-danger btn-small" onclick="javascript:history.back(-1);" title="后退"><i id="nav-search-icon" class="icon-reply icon-2x icon-only"></i></a></td>
 				</tr>
 			</table>
 			<!-- 检索  -->
 		
-		
+			<table>
+				<tr>
+					<td>
+						<span>${pd.DWMC}>></span>
+					</td>
+				</tr>
+			</table>
 			<table id="table_report" class="table table-striped table-bordered table-hover">
 				
 				<thead>
 					<tr>
-						<!-- <th class="center">
-						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
-						</th>
-						<th class="center">序号</th> -->
 						<th class="center">承办人工号</th>
 						<th class="center">承办人</th>
 						<th class="center">案件类别名称</th>
@@ -75,11 +76,7 @@
 					<c:when test="${not empty varList}">
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
-							<tr>
-								<%-- <td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
-								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
+							<tr id="tr">
 								<td>${var.CBRGH}</td>
 								<td>${var.CBR}</td>
 								<td>${var.AJLB_MC}</td>
@@ -104,13 +101,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  
@@ -134,6 +124,9 @@
 		<script src="static/js/ace-elements.min.js"></script>
 		<script src="static/js/ace.min.js"></script>
 		
+		<script type="text/javascript" src="static/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="static/js/jquery.dataTables.bootstrap.js"></script>
+		
 		<script type="text/javascript" src="static/js/chosen.jquery.min.js"></script><!-- 下拉框 -->
 		<script type="text/javascript" src="static/js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
 		<script type="text/javascript" src="static/js/bootbox.min.js"></script><!-- 确认窗口 -->
@@ -142,6 +135,21 @@
 		<script type="text/javascript">
 		
 		$(top.hangge());
+		
+		$(function() {
+			var i = $('#tr');
+			if(i.length > 0){
+				$('#table_report').dataTable({
+					"bInfo": false,
+					"bFilter": false,
+					"bPaginate": false,
+					"bLengthChange": false
+				});
+					
+				$('[data-rel=tooltip]').tooltip();
+			}
+			
+		})
 		
 		//检索
 		function search(){

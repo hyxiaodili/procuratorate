@@ -77,7 +77,10 @@
 									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
-										<td>${var.DWMC}</td>
+										<td>
+											<%-- <a href="<%=basePath%>region/listbyUnitname">${var.DWMC}</a> --%>
+											${var.DWMC}
+										</td>
 										<td>${var.SJDQ_JCJS}</td>
 								<%-- <td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
@@ -119,21 +122,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

@@ -66,6 +66,10 @@ public class DateditService {
 		dao.delete("DateditMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+	public  List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("DateditMapper.listbyUnitname", pd);
+	}
+	
 	public  List<PageData> listbyAccept(PageData pd)throws Exception{
 		return  (List<PageData>)dao.findForList("DateditMapper.listbyAccept", pd);
 	}

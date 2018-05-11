@@ -116,6 +116,12 @@ public class MajorStandardController extends BaseController {
 		String beginTime = pd.getString("beginTime");
 		String endTime = pd.getString("endTime");
 		String field1 = pd.getString("field1");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != field1 && !"".equals(field1)){
 			field1 = field1.trim();
@@ -169,6 +175,12 @@ public class MajorStandardController extends BaseController {
 		String DWBM = pd.getString("DWBM");
 		String beginTime = pd.getString("beginTime");
 		String endTime = pd.getString("endTime");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();

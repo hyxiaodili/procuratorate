@@ -66,8 +66,8 @@ public class MajorRealService {
 		return (List<PageData>)dao.findForList("MajorRealMapper.listbyMajorreal", pd);
 	}
 
-	public List<PageData> listbyMajorrealEj(PageData pd)throws Exception{
-		return (List<PageData>)dao.findForList("MajorRealMapper.listbyMajorrealEJ", pd);
+	public List<PageData> listbyInvolvemajorEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("MajorRealMapper.listbyInvolvemajorEJ", pd);
 	}
 	
 	/*

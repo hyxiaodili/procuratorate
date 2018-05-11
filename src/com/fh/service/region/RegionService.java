@@ -52,6 +52,10 @@ public class RegionService {
 		return (List<PageData>)dao.findForList("RegionMapper.listAll", pd);
 	}
 	
+	public List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("RegionMapper.listbyUnitname", pd);
+	}
+	
 	/*
 	* 通过id获取数据
 	*/

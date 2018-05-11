@@ -67,6 +67,10 @@ public class ConfigureabnormalService {
 	}
 	
 	
+	public  List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("ConfigureabnormalMapper.listbyUnitname", pd);
+	}
+	
 	public  List<PageData> listbyUnitforshort(PageData pd)throws Exception{
 		return  (List<PageData>)dao.findForList("ConfigureabnormalMapper.listbyUnitforshort", pd);
 	}

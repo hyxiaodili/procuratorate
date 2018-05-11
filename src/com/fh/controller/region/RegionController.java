@@ -107,11 +107,33 @@ public class RegionController extends BaseController {
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
+		pd = this.getPageData();
 		try{
-			pd = this.getPageData();
 			page.setPd(pd);
 			List<PageData>	varList = regionService.listAll(pd);	//列出AGGZTJ_DQ_3列表
 			mv.setViewName("region/region_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
+	 * 根据单位名称查询
+	 */
+	@RequestMapping(value="/listbyUnitname")
+	public ModelAndView listbyUnitname(){
+		logBefore(logger, "列表AGGZTJ_DQ_3");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		try{
+			List<PageData>	varList = regionService.listbyUnitname(pd);	//列出AGGZTJ_DQ_3列表
+			mv.setViewName("region/regionyj_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限

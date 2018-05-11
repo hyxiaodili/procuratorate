@@ -92,64 +92,49 @@
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
-		select a.dwbm,
-		a.dwmc,
-		nvl(kyjc_jcjs_zdysj,'0') kyjc_jcjs_zdysj,
-		nvl(jsxz_jcjs_zdysj,'0') jsxz_jcjs_zdysj,
-		nvl(tbly_jcjs_zdysj,'0') tbly_jcjs_zdysj,
-		nvl(jyjd_jcjs_zdysj,'0') jyjd_jcjs_zdysj,
-		nvl(zjsc_jcjs_zdysj,'0') zjsc_jcjs_zdysj,
-		nvl(jcjy_jcjs_zdysj,'0') jcjy_jcjs_zdysj, 
-		nvl(sxyttq_jcjs_zdysj,'0') sxyttq_jcjs_zdysj
-		from t_aggztj_dq_3 a,
-		(select
-		      count(distinct t.tysah),count(t.DWBM) DWBM,
-		      count(case when t.AJLB_BM like '1301%' then t.bmsah end) kyjc_jcjs_zdysj,
-		      count(case when t.AJLB_BM like '1302%' then t.bmsah end) jsxz_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1303%' then t.bmsah end) tbly_jcjs_zdysj, 
-		      count(case when t.AJLB_BM like '1304%' then t.bmsah end) jyjd_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1305%' then t.bmsah end) zjsc_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1306%' then t.bmsah end) jcjy_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1307%' then t.bmsah end) sxyttq_jcjs_zdysj
-		from t_ajjbxx_jcjs_min t
-		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
-					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
-		--and t.DWBM like substr(t.DWBM,1,4) || '%' 
-		group by t.DWBM 
-		) b
-		where a.dwbm = substr(b.DWBM(+),1,4) 
-		order by DWBM asc
+		select dwbm,dwmc,kyjc_jcjs_tysah_zdysj,jsxz_jcjs_tysah_zdysj,tbly_jcjs_tysah_zdysj,jyjd_jcjs_tysah_zdysj,zjsc_jcjs_tysah_zdysj,jcjy_jcjs_tysah_zdysj,sxyttq_jcjs_tysah_zdysj
+from
+(
+select b.dwbm,b.dwmc,nvl(kyjc_jcjs_tysah_zdysj,'0')kyjc_jcjs_tysah_zdysj, nvl(jsxz_jcjs_tysah_zdysj,'0')jsxz_jcjs_tysah_zdysj, nvl(tbly_jcjs_tysah_zdysj,'0')tbly_jcjs_tysah_zdysj, nvl(jyjd_jcjs_tysah_zdysj,'0')jyjd_jcjs_tysah_zdysj, nvl(zjsc_jcjs_tysah_zdysj,'0')zjsc_jcjs_tysah_zdysj,nvl(jcjy_jcjs_tysah_zdysj,'0')jcjy_jcjs_tysah_zdysj, nvl(sxyttq_jcjs_tysah_zdysj,'0')sxyttq_jcjs_tysah_zdysj
+from
+(select dwbm,sum(kyjc_jcjs_tysah_zdysj)kyjc_jcjs_tysah_zdysj,sum(jsxz_jcjs_tysah_zdysj)jsxz_jcjs_tysah_zdysj,sum(tbly_jcjs_tysah_zdysj)tbly_jcjs_tysah_zdysj,sum(jyjd_jcjs_tysah_zdysj)jyjd_jcjs_tysah_zdysj,sum(zjsc_jcjs_tysah_zdysj)zjsc_jcjs_tysah_zdysj,sum(jcjy_jcjs_tysah_zdysj)jcjy_jcjs_tysah_zdysj,sum(sxyttq_jcjs_tysah_zdysj)sxyttq_jcjs_tysah_zdysj
+from
+(select
+        substr(t.DWBM,1,4) dwbm,
+        count (distinct((case when t.AJLB_BM like '1301%' then t.tysah end))) kyjc_jcjs_tysah_zdysj,
+        count (distinct((case when t.AJLB_BM like '1302%' then t.tysah end))) jsxz_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1303%' then t.tysah end))) tbly_jcjs_tysah_zdysj, 
+        count (distinct((case when t.AJLB_BM like '1304%' then t.tysah end))) jyjd_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1305%' then t.tysah end))) zjsc_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1306%' then t.tysah end))) jcjy_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1307%' then t.tysah end))) sxyttq_jcjs_tysah_zdysj
+  from t_ajjbxx_jcjs_min t
+ where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+ AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+   group by substr(t.DWBM,1,4)) p group by dwbm,kyjc_jcjs_tysah_zdysj,jsxz_jcjs_tysah_zdysj,tbly_jcjs_tysah_zdysj,jyjd_jcjs_tysah_zdysj,zjsc_jcjs_tysah_zdysj,jcjy_jcjs_tysah_zdysj,sxyttq_jcjs_tysah_zdysj) a right join t_aggztj_dq_3 b on a.dwbm=b.dwbm ) where dwmc not like '%总计%'order by dwbm
 	</select>
 	
 	<!-- 超链接一级 -->
 	<select id="listbyCasereal" parameterType="pd" resultType="pd">
-		select a.dwbm,
-		a.dwmc,
-		nvl(kyjc_jcjs_zdysj,'0') kyjc_jcjs_zdysj,
-		nvl(jsxz_jcjs_zdysj,'0') jsxz_jcjs_zdysj,
-		nvl(tbly_jcjs_zdysj,'0') tbly_jcjs_zdysj,
-		nvl(jyjd_jcjs_zdysj,'0') jyjd_jcjs_zdysj,
-		nvl(zjsc_jcjs_zdysj,'0') zjsc_jcjs_zdysj,
-		nvl(jcjy_jcjs_zdysj,'0') jcjy_jcjs_zdysj, 
-		nvl(sxyttq_jcjs_zdysj,'0') sxyttq_jcjs_zdysj
-		from t_aggztj_dq_4 a,
-		(select
-		      count(distinct t.tysah),count(t.DWBM) DWBM,
-		      count(case when t.AJLB_BM like '1301%' then t.bmsah end) kyjc_jcjs_zdysj,
-		      count(case when t.AJLB_BM like '1302%' then t.bmsah end) jsxz_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1303%' then t.bmsah end) tbly_jcjs_zdysj, 
-		      count(case when t.AJLB_BM like '1304%' then t.bmsah end) jyjd_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1305%' then t.bmsah end) zjsc_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1306%' then t.bmsah end) jcjy_jcjs_zdysj,  
-		      count(case when t.AJLB_BM like '1307%' then t.bmsah end) sxyttq_jcjs_zdysj
-		from t_ajjbxx_jcjs_min t
-		where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
-					 AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
-		--and t.DWBM like substr(t.DWBM,1,4) || '%' 
-		group by t.DWBM 
-		) b
-		where a.dwbm = substr(b.DWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')  
-		order by DWBM asc
+		select dwbm,dwmc,kyjc_jcjs_tysah_zdysj,jsxz_jcjs_tysah_zdysj,tbly_jcjs_tysah_zdysj,jyjd_jcjs_tysah_zdysj,zjsc_jcjs_tysah_zdysj,jcjy_jcjs_tysah_zdysj,sxyttq_jcjs_tysah_zdysj
+from
+(select b.dwbm,b.dwmc,nvl(kyjc_jcjs_tysah_zdysj,'0') kyjc_jcjs_tysah_zdysj, nvl(jsxz_jcjs_tysah_zdysj,'0') jsxz_jcjs_tysah_zdysj, nvl(tbly_jcjs_tysah_zdysj,'0') tbly_jcjs_tysah_zdysj, nvl(jyjd_jcjs_tysah_zdysj,'0') jyjd_jcjs_tysah_zdysj, nvl(zjsc_jcjs_tysah_zdysj,'0') zjsc_jcjs_tysah_zdysj,nvl(jcjy_jcjs_tysah_zdysj,'0') jcjy_jcjs_tysah_zdysj, nvl(sxyttq_jcjs_tysah_zdysj,'0') sxyttq_jcjs_tysah_zdysj
+from
+(select dwbm,sum(kyjc_jcjs_tysah_zdysj) kyjc_jcjs_tysah_zdysj,sum(jsxz_jcjs_tysah_zdysj) jsxz_jcjs_tysah_zdysj,sum(tbly_jcjs_tysah_zdysj) tbly_jcjs_tysah_zdysj,sum(jyjd_jcjs_tysah_zdysj) jyjd_jcjs_tysah_zdysj,sum(zjsc_jcjs_tysah_zdysj) zjsc_jcjs_tysah_zdysj,sum(jcjy_jcjs_tysah_zdysj) jcjy_jcjs_tysah_zdysj,sum(sxyttq_jcjs_tysah_zdysj) sxyttq_jcjs_tysah_zdysj
+from
+(select
+        substr(t.DWBM,1,6) dwbm,
+        count (distinct((case when t.AJLB_BM like '1301%' then t.tysah end))) kyjc_jcjs_tysah_zdysj,
+        count (distinct((case when t.AJLB_BM like '1302%' then t.tysah end))) jsxz_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1303%' then t.tysah end))) tbly_jcjs_tysah_zdysj, 
+        count (distinct((case when t.AJLB_BM like '1304%' then t.tysah end))) jyjd_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1305%' then t.tysah end))) zjsc_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1306%' then t.tysah end))) jcjy_jcjs_tysah_zdysj,  
+        count (distinct((case when t.AJLB_BM like '1307%' then t.tysah end))) sxyttq_jcjs_tysah_zdysj
+  from t_ajjbxx_jcjs_min t
+ where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+ AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+   group by substr(t.DWBM,1,6)) p group by dwbm,kyjc_jcjs_tysah_zdysj,jsxz_jcjs_tysah_zdysj,tbly_jcjs_tysah_zdysj,jyjd_jcjs_tysah_zdysj,zjsc_jcjs_tysah_zdysj,jcjy_jcjs_tysah_zdysj,sxyttq_jcjs_tysah_zdysj) a right join t_aggztj_dq_4 b on a.dwbm=b.dwbm ) where dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') order by dwbm
 	</select>
 	
 	<select id="listbyCaserealEJ" parameterType="pd" resultType="pd">

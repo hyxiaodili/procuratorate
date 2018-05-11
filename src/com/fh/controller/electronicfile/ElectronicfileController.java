@@ -155,6 +155,12 @@ public class ElectronicfileController extends BaseController {
 		String endTime = pd.getString("endTime");
 		String field1 = pd.getString("field1");
 		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();

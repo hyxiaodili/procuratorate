@@ -46,12 +46,19 @@
 					<c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
 					</c:if>
-					<td><a href="javascript:history.go(-1)" target=_self>返回</a></td>
+					<td style="vertical-align:top;"><button class="btn btn-danger btn-small" onclick="javascript:history.back(1);"  title="后退"><i id="nav-search-icon" class="icon-reply icon-2x icon-only"></i></button></td>
 				</tr>
 			</table>
 			<!-- 检索  -->
 		
-		
+			
+			<table>
+				<tr>
+					<td>
+						<span>${pd.DWMC}>></span>
+					</td>
+				</tr>
+			</table>
 			<table id="table_report" class="table table-striped table-bordered table-hover">
 				
 				<thead>
@@ -84,7 +91,7 @@
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
 								<td>
-									<a href="<%=basePath%>casestandard/listbyidCasetypeEJ?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}">${var.DWMC}</a>
+									<a href="<%=basePath%>casestandard/listbyidCasetypeEJ?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}&DWMC=${var.DWMC}">${var.DWMC}</a>
 								</td>
 								<td>${var.KYJC_JCJS_ZDYSJ}</td>
 								<td>${var.JSXZ_JCJS_ZDYSJ}</td>
@@ -113,13 +120,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

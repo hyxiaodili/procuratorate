@@ -120,6 +120,29 @@ public class TypeController extends BaseController {
 	}
 	
 	/**
+	 * 根据单位名称查询
+	 */
+	@RequestMapping(value="/listbyUnitname")
+	public ModelAndView listbyUnitname(Page page){
+		logBefore(logger, "列表SJLX");
+		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		try{
+			pd = this.getPageData();
+			page.setPd(pd);
+			List<PageData>	varList = typeService.listbyUnitname(pd);	//列出SJLX列表
+			mv.setViewName("type/typeyj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
+		return mv;
+	}
+	
+	/**
 	 * 去新增页面
 	 */
 	@RequestMapping(value="/goAdd")

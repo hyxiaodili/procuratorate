@@ -46,7 +46,7 @@
 					<c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
 					</c:if>
-					<td><a href="javascript:history.go(-1)" target=_self>返回</a></td>
+					<td style="vertical-align:top;"><a class="btn btn-danger btn-small" onclick="javascript:history.back(-1);" title="后退"><i id="nav-search-icon" class="icon-reply icon-2x icon-only"></i></a></td>
 				</tr>
 			</table>
 			<!-- 检索  -->
@@ -56,10 +56,6 @@
 				
 				<thead>
 					<tr>
-						<!-- <th class="center">
-						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
-						</th>
-						<th class="center">序号</th> -->
 						<th class="center">源案件承办单位名称</th>
 						<th class="center">源案件案件类别名称</th>
 						<th class="center">源案件统一受案号</th>
@@ -69,7 +65,6 @@
 						<th class="center">关联案件案件类别名称</th>
 						<th class="center">关联案件统一受案号</th>
 						<th class="center">关联案件部门受案号</th>
-						<!-- <th class="center">操作</th> -->
 					</tr>
 				</thead>
 										
@@ -80,11 +75,7 @@
 					<c:when test="${not empty varList}">
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
-							<tr>
-								<%-- <td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
-								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
+							<tr id="tr">
 										<td>${var.YAJ_CBDW_MC}</td>
 										<td>${var.YAJ_AJLB_MC}</td>
 										<td>${var.YAJ_TYSAH}</td>
@@ -94,25 +85,6 @@
 										<td>${var.GLAJ_AJLB_MC}</td>
 										<td>${var.GLAJ_TYSAH}</td>
 										<td>${var.GLAJ_BMSAH}</td>
-								<%-- <td style="width: 30px;" class="center">
-									<div class='hidden-phone visible-desktop btn-group'>
-									
-										<c:if test="${QX.edit != 1 && QX.del != 1 }">
-										<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="icon-lock" title="无权限"></i></span>
-										</c:if>
-										<div class="inline position-relative">
-										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
-										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.AGGZTJ_DQ_3_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											</c:if>
-											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.AGGZTJ_DQ_3_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
-											</c:if>
-										</ul>
-										</div>
-									</div>
-								</td> --%>
 							</tr>
 						
 						</c:forEach>
@@ -133,22 +105,6 @@
 				
 				</tbody>
 			</table>
-			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  
@@ -172,6 +128,9 @@
 		<script src="static/js/ace-elements.min.js"></script>
 		<script src="static/js/ace.min.js"></script>
 		
+		<script type="text/javascript" src="static/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="static/js/jquery.dataTables.bootstrap.js"></script>
+		
 		<script type="text/javascript" src="static/js/chosen.jquery.min.js"></script><!-- 下拉框 -->
 		<script type="text/javascript" src="static/js/bootstrap-datepicker.min.js"></script><!-- 日期框 -->
 		<script type="text/javascript" src="static/js/bootbox.min.js"></script><!-- 确认窗口 -->
@@ -180,6 +139,21 @@
 		<script type="text/javascript">
 		
 		$(top.hangge());
+		
+		$(function() {
+			var i = $('#tr');
+			if(i.length > 0){
+				$('#table_report').dataTable({
+					"bInfo": false,
+					"bFilter": false,
+					"bPaginate": false,
+					"bLengthChange": false
+				});
+					
+				$('[data-rel=tooltip]').tooltip();
+			}
+			
+		})
 		
 		//检索
 		function search(){

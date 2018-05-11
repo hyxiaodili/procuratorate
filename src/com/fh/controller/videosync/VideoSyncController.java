@@ -97,6 +97,12 @@ public class VideoSyncController extends BaseController {
 		pd = this.getPageData();
 		
 		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();

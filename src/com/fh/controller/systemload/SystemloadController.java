@@ -109,10 +109,13 @@ public class SystemloadController extends BaseController {
 		//if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
+		
 		try{
 			pd = this.getPageData();
+			
 			page.setPd(pd);
-			List<PageData>	varList = systemloadService.listAll(pd);	//列出systemload列表
+			List<PageData> varList = systemloadService.listAll(pd);	//列出systemload列表
+			
 			mv.setViewName("systemload/systemload_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
@@ -123,6 +126,39 @@ public class SystemloadController extends BaseController {
 		return mv;
 	}
 	/**
+	 * 根据单位名称查询
+	 */
+	@RequestMapping(value="/listbyUnitname")
+	public ModelAndView listbyUnitname(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		try {
+			List<PageData>	varList = systemloadService.listbyUnitname(pd);	//根据ID读取
+			mv.setViewName("systemload/systemloadyj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}						
+		return mv;
+	}
+	
+	/**
 	 * 根据用户数量查询
 	 */
 	@RequestMapping(value="/listbyid")
@@ -131,11 +167,11 @@ public class SystemloadController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = systemloadService.findlistById(pd);	//根据ID读取
@@ -157,15 +193,15 @@ public class SystemloadController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = systemloadService.listbyAdministratorcount(pd);	//根据ID读取
-			mv.setViewName("systemload/yhsl_list");
+			mv.setViewName("systemload/glysl_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限

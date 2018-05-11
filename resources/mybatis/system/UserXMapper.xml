@@ -257,7 +257,7 @@
 		where u.ROLE_ID = r.ROLE_ID 
 		and u.USERNAME != 'admin'
 		and (r.ROLE_ID != '7' and r.PARENT_ID != '7')
-		<if test="USERNAME != null and USERNAME != ''"><!-- 关键词检索 -->
+		<if test="USERNAME != null and USERNAME != ''">关键词检索
 			and
 				(
 					 u.USERNAME LIKE CONCAT(CONCAT('%', #{USERNAME}),'%')
@@ -271,13 +271,13 @@
 					 u.PHONE LIKE CONCAT(CONCAT('%', #{USERNAME}),'%')
 				)
 		</if>
-		<if test="ROLE_ID != null and ROLE_ID != ''"><!-- 角色检索 -->
+		<if test="ROLE_ID != null and ROLE_ID != ''">角色检索
 			and u.ROLE_ID=#{ROLE_ID} 
 		</if>
-		<if test="lastLoginStart!=null and lastLoginStart!=''"><!-- 登录时间检索 -->
+		<if test="lastLoginStart!=null and lastLoginStart!=''">登录时间检索
 			and u.LAST_LOGIN &gt;= #{lastLoginStart} 
 		</if>
-		<if test="lastLoginEnd!=null and lastLoginEnd!=''"><!-- 登录时间检索 -->
+		<if test="lastLoginEnd!=null and lastLoginEnd!=''">登录时间检索
 			and u.LAST_LOGIN &lt;= #{lastLoginEnd} 
 		</if>
 		order by u.LAST_LOGIN desc

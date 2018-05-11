@@ -46,7 +46,7 @@
 					<c:if test="${QX.cha == 1 }">
 					<td style="vertical-align:top;"><a class="btn btn-mini btn-light" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="icon-download-alt"></i></a></td>
 					</c:if>
-					<td><a href="javascript:history.go(-1)" target=_self>返回</a></td>
+					<td style="vertical-align:top;"><a class="btn btn-danger btn-small" onclick="javascript:history.back(-1);" title="后退"><i id="nav-search-icon" class="icon-reply icon-2x icon-only"></i></a></td>
 				</tr>
 			</table>
 			<!-- 检索  -->
@@ -126,21 +126,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

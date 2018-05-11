@@ -63,11 +63,18 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
+				a.DWBM,
 				a.DWMC,	
 				a.SJDQ_JCJS,	
 				a.AGGZTJ_DQ_3_ID
 		from 
 				T_AGGZTJ_DQ_3 a
+	</select>
+	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select dwmc,sjdq_jcjs 
+		from T_AGGZTJ_DQ_3 t 
+		order by dwbm asc
 	</select>
 	
 	<!-- 批量删除 -->

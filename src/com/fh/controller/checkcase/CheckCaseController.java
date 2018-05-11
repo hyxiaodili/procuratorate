@@ -100,14 +100,19 @@ public class CheckCaseController extends BaseController {
 		pd = this.getPageData();
 		
 		String DWBM = pd.getString("DWBM");
+		String beginTime = pd.getString("beginTime");
+		String endTime = pd.getString("endTime");
+		String DWMC = pd.getString("DWMC");
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();
 			pd.put("DWBM", DWBM);
 		}
 		
-		String beginTime = pd.getString("beginTime");
-		String endTime = pd.getString("endTime");
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(beginTime != null && !"".equals(beginTime)){
 			pd.put("beginTime", beginTime);

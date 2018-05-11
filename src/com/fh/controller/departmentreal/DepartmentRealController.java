@@ -113,6 +113,12 @@ public class DepartmentRealController extends BaseController {
 		String endTime = pd.getString("endTime");
 		String field1 = pd.getString("field1");
 		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();
@@ -144,7 +150,7 @@ public class DepartmentRealController extends BaseController {
 		try{
 			page.setPd(pd);
 			List<PageData>	varList = departmentRealService.listbyDepartmentreal(pd);	//列出AGGZTJ_DQ_3列表
-			mv.setViewName("departmentstandard/wtbmyj_list");
+			mv.setViewName("departmentreal/wtbmyj_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
@@ -157,14 +163,20 @@ public class DepartmentRealController extends BaseController {
 	/**
 	 * 单位名称超链接
 	 */
-	@RequestMapping(value="/listbyDepartmentrealEJ")
-	public ModelAndView listbyDepartmentreal(){
+	@RequestMapping(value="/listbyEntrustdeptEJ")
+	public ModelAndView listbyEntrustdeptEJ(){
 		logBefore(logger, "去修改YHSL页面");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		
 		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();
@@ -189,8 +201,8 @@ public class DepartmentRealController extends BaseController {
 		}
 		
 		try {
-			List<PageData>	varList = departmentRealService.listbyDepartmentreal(pd);	//根据ID读取
-			mv.setViewName("departmentstandard/wtbm_list");
+			List<PageData>	varList = departmentRealService.listbyEntrustdeptEJ(pd);	//根据ID读取
+			mv.setViewName("departmentreal/wtbm_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限

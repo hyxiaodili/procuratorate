@@ -78,6 +78,7 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
+				a."DWBM",
 				a."DWMC",	
 				a."DLRC",	
 				a."DLRCRJ",	
@@ -86,6 +87,13 @@
 				a."AGGZTJ_DQ_3_ID"
 		from 
 				"T_AGGZTJ_DQ_3" a
+	</select>
+	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select dwbm,dwmc,dlrc,yhsl,glysl 
+		from T_AGGZTJ_DQ_4 t 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+		order by dwbm asc
 	</select>
 	
 	<!-- 批量删除 -->
@@ -100,15 +108,18 @@
 	
 	<!-- 通过ID获取数据 -->
 	<select id="findlistById" parameterType="pd" resultType="pd">
-		select caid,gh,mc,dlbm from v_yhsl  where 
-		dwbm LIKE CONCAT(CONCAT('%', #{YHSL_ID}),'%')
+		select caid,gh,mc,dlbm 
+		from v_yhsl  where 
+		dwbm LIKE CONCAT(CONCAT('%', #{DWBM}),'%')
 		order by caid,gh asc
 	</select>
 
 	<select id="listbyAdministratorcount" parameterType="pd" resultType="pd">
-		select caid,gh,mc,dlbm 
-		from v_glysl 
-		where dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%')
-		order by caid,gh asc
+		select b.dwmc,caid,gzzh,mc,dlbm 
+		from v_glysl a,T_AGGZTJ_DQ_4 b
+		where a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%')
+		order by caid,gzzh asc
+
 	</select>
+	
 </mapper>

@@ -68,6 +68,7 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
+				a.DWBM,
 				a.DWMC,	
 				a.SAJL_JCJS,	
 				a.WSYSJL_JCJS,	
@@ -86,16 +87,23 @@
 		</foreach>
 	</delete>
 	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select dwbm,dwmc,sajl_jcjs,wsysjl_jcjs 
+		from T_AGGZTJ_DQ_4 t 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
+		order by dwbm asc
+	</select>
+	
 	<select id="listbySendthecase" parameterType="pd" resultType="pd">
 		select ajlb_mc,bmsah,salb_mc,cbr,sarq,sashr,sashrq,sddwmc,sddwmcdyzzjg 
 		from  v_sarz_jcjs t 
-		where t.dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by ajlb_bm,bmsah,salb_bm,sarq asc
 	</select>
 
 	<select id="listbyDocumenttransfer" parameterType="pd" resultType="pd">
 		select ajlb_mc,bmsah,yswsmc,ysrq,ysbmmc,ysr,sddwmc,sdbmlbmc,sdbmmc 
-		from  v_wsysrz_jcjs t where t.ysdwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		from  v_wsysrz_jcjs t where t.ysdwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by ajlb_bm,bmsah,ysbh,ysrq asc
 	</select>
 	

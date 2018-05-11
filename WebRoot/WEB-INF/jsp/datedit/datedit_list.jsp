@@ -79,17 +79,19 @@
 									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
-										<td>${var.DWMC}</td>
+										<td>
+											<a href="<%=basePath%>datedit/listbyUnitname?DWBM=${var.DWBM}&DWMC=${var.DWMC}">${var.DWMC}</a>
+										</td>
 										<!-- 受理日期修改 -->
 										<td>
-											<a href="<%=basePath%>datedit/listbyAccept?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.SLRQXG_JCJS}</a>
+											<a href="<%=basePath%>datedit/listbyAccept?DWBM=${var.DWBM}">${var.SLRQXG_JCJS}</a>
 										</td>
 										<!-- 办结日期修改 -->
 										<td>
-											<a href="<%=basePath%>datedit/listbyConclude?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.BJRQXG_JCJS}</a>
+											<a href="<%=basePath%>datedit/listbyConclude?DWBM=${var.DWBM}">${var.BJRQXG_JCJS}</a>
 										</td>
 										<td>
-											<a href="<%=basePath%>datedit/listbyExpire?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.DQRQXG_JCJS}</a>
+											<a href="<%=basePath%>datedit/listbyExpire?DWBM=${var.DWBM}">${var.DQRQXG_JCJS}</a>
 										</td>
 								<%-- <td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
@@ -131,21 +133,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

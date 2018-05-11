@@ -63,6 +63,10 @@ public class SystemloadService {
 		return  (List<PageData>)dao.findForList("SystemloadMapper.listbyAdministratorcount", pd);
 	}
 	
+	public  List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("SystemloadMapper.listbyUnitname", pd);
+	}
+	
 	/*
 	* 批量删除
 	*/

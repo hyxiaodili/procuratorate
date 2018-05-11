@@ -78,7 +78,6 @@ public class CaseStandardController extends BaseController {
 		}
 		
 		try{
-			
 			page.setPd(pd);
 			List<PageData>	varList = casestandardService.listAll(pd);	//列出AGGZTJ_DQ_3列表
 			mv.setViewName("casestandard/casestandard_list");
@@ -104,6 +103,12 @@ public class CaseStandardController extends BaseController {
 		String DWBM = pd.getString("DWBM");
 		String beginTime = pd.getString("beginTime");
 		String endTime = pd.getString("endTime");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();
@@ -149,6 +154,12 @@ public class CaseStandardController extends BaseController {
 		String DWBM = pd.getString("DWBM");
 		String beginTime = pd.getString("beginTime");
 		String endTime = pd.getString("endTime");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != DWBM && !"".equals(DWBM)){
 			DWBM = DWBM.trim();

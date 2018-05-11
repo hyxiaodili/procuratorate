@@ -91,7 +91,7 @@
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
 										<td>
-											${var.DWMC}
+											<a href="<%=basePath%>majorstandard/listbyInvolvemajor?DWBM=${var.DWBM}&beginTime=${pd.beginTime}&endTime=${pd.endTime}&DWMC=${var.DWMC}">${var.DWMC}</a>
 										</td>
 										<td>${var.FYLC_JCJS_ZDYSJ}</td>
 										<td>${var.FYBL_JCJS_ZDYSJ}</td>
@@ -129,13 +129,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

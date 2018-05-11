@@ -57,15 +57,10 @@
 				
 				<thead>
 					<tr>
-						<!-- <th class="center">
-						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
-						</th>
-						<th class="center">序号</th> -->
 						<th class="center">单位名称</th>
 						<th class="center">部门名称</th>
 						<th class="center">角色名称</th>
 						<th class="center">登录别名</th>
-						<!-- <th class="center">操作</th> -->
 					</tr>
 				</thead>
 										
@@ -77,33 +72,10 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<%-- <td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.SJLX_ID}" /><span class="lbl"></span></label>
-								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
-										<td>${var.DWMC}</td>
-										<td>${var.BMMC}</td>
-										<td>${var.JSMC}</td>
-										<td>${var.DLBM}</td>
-								<%-- <td style="width: 30px;" class="center">
-									<div class='hidden-phone visible-desktop btn-group'>
-									
-										<c:if test="${QX.edit != 1 && QX.del != 1 }">
-										<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="icon-lock" title="无权限"></i></span>
-										</c:if>
-										<div class="inline position-relative">
-										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
-										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.SJLX_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											</c:if>
-											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.SJLX_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
-											</c:if>
-										</ul>
-										</div>
-									</div>
-								</td> --%>
+								<td>${var.DWMC}</td>
+								<td>${var.BMMC}</td>
+								<td>${var.JSMC}</td>
+								<td>${var.DLBM}</td>
 							</tr>
 						
 						</c:forEach>
@@ -125,21 +97,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

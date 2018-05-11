@@ -69,6 +69,12 @@
 				T_SJLX a
 	</select>
 	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select sjmc,sjsl 
+		from T_SJLX 
+		order by sjbm asc
+	</select>
+	
 	<!-- 批量删除 -->
 	<delete id="deleteAll" parameterType="String">
 		delete from T_SJLX

@@ -66,6 +66,10 @@ public class CaserelevanceService {
 		dao.delete("CaserelevanceMapper.deleteAll", ArrayDATA_IDS);
 	}
 	
+	public  List<PageData> listbyUnitname(PageData pd)throws Exception{
+		return  (List<PageData>)dao.findForList("CaserelevanceMapper.listbyUnitname", pd);
+	}
+	
 	public  List<PageData> listbySourcecase(PageData pd)throws Exception{
 		return  (List<PageData>)dao.findForList("CaserelevanceMapper.listbySourcecase", pd);
 	}

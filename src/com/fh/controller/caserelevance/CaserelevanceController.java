@@ -120,6 +120,39 @@ public class CaserelevanceController extends BaseController {
 	}
 	
 	/**
+	 * 根据单位名称查询
+	 */
+	@RequestMapping(value="/listbyUnitname")
+	public ModelAndView listbyUnitname(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		try {
+			List<PageData>	varList = caserelevanceService.listbyUnitname(pd);	//根据ID读取
+			mv.setViewName("caserelevance/caserelevanceyj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}						
+		return mv;
+	}
+	
+	/**
 	 * 根据源案件查询
 	 */
 	@RequestMapping(value="/listbySourcecase")
@@ -128,11 +161,11 @@ public class CaserelevanceController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = caserelevanceService.listbySourcecase(pd);	//根据ID读取
@@ -155,11 +188,11 @@ public class CaserelevanceController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = caserelevanceService.listbyRelevancecase(pd);	//根据ID读取

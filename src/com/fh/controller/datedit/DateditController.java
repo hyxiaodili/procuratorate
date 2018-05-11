@@ -122,6 +122,38 @@ public class DateditController extends BaseController {
 	}
 	
 	/**
+	 * 根据单位名称查询
+	 */
+	@RequestMapping(value="/listbyUnitname")
+	public ModelAndView listbyUnitname(){
+		logBefore(logger, "去修改YHSL页面");
+		ModelAndView mv = this.getModelAndView();
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String DWBM = pd.getString("DWBM");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
+		
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
+		}
+		try {
+			List<PageData>	varList = dateditService.listbyUnitname(pd);	//根据ID读取
+			mv.setViewName("datedit/datedityj_list");
+			mv.addObject("varList", varList);
+			mv.addObject("pd", pd);
+			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
+		} catch (Exception e) {
+			logger.error(e.toString(), e);
+		}						
+		return mv;
+	}
+	/**
 	 * 根据受理日期查询
 	 */
 	@RequestMapping(value="/listbyAccept")
@@ -130,11 +162,11 @@ public class DateditController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = dateditService.listbyAccept(pd);	//根据ID读取
@@ -157,11 +189,11 @@ public class DateditController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = dateditService.listbyConclude(pd);	//根据ID读取
@@ -184,11 +216,11 @@ public class DateditController extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		String YHSL_ID = pd.getString("YHSL_ID");
+		String DWBM = pd.getString("DWBM");
 		
-		if(null != YHSL_ID && !"".equals(YHSL_ID)){
-			YHSL_ID = YHSL_ID.trim();
-			pd.put("YHSL_ID", YHSL_ID);
+		if(null != DWBM && !"".equals(DWBM)){
+			DWBM = DWBM.trim();
+			pd.put("DWBM", DWBM);
 		}
 		try {
 			List<PageData>	varList = dateditService.listbyExpire(pd);	//根据ID读取

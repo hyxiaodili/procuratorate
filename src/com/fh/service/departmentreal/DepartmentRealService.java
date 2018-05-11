@@ -59,8 +59,8 @@ public class DepartmentRealService {
 		return (List<PageData>)dao.findForList("DepartmentRealMapper.listbyDepartmentreal", pd);
 	}
 	
-	public List<PageData> listbyDepartmentrealEJ(PageData pd)throws Exception{
-		return (List<PageData>)dao.findForList("DepartmentRealMapper.listbyDepartmentrealEJ", pd);
+	public List<PageData> listbyEntrustdeptEJ(PageData pd)throws Exception{
+		return (List<PageData>)dao.findForList("DepartmentRealMapper.listbyEntrustdeptEJ", pd);
 	}
 	
 	/*

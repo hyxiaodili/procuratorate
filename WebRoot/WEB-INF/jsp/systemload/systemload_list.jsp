@@ -76,38 +76,17 @@
 						<c:if test="${QX.cha == 1 }">
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
-								<%-- <td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.AGGZTJ_DQ_3_ID}" /><span class="lbl"></span></label>
+								<td>
+									<a href="<%=basePath%>systemload/listbyUnitname?DWBM=${var.DWBM}&DWMC=${var.DWMC}">${var.DWMC}</a>
 								</td>
-								<td class='center' style="width: 30px;">${vs.index+1}</td> --%>
-										<td>${var.DWMC}</td>
-										<td>${var.DLRC}</td>
-										<td>${var.DLRCRJ}</td>
-										<td>
-										<a href="<%=basePath%>systemload/listbyid?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.YHSL}</a>
-										</td>
-										<td>
-											<a href="<%=basePath%>systemload/listbyAdministratorcount?YHSL_ID=${var.AGGZTJ_DQ_3_ID}">${var.GLYSL}</a>
-										</td>
-								<%-- <td style="width: 30px;" class="center">
-									<div class='hidden-phone visible-desktop btn-group'>
-									
-										<c:if test="${QX.edit != 1 && QX.del != 1 }">
-										<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="icon-lock" title="无权限"></i></span>
-										</c:if>
-										<div class="inline position-relative">
-										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
-										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
-											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.AGGZTJ_DQ_3_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
-											</c:if>
-											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.AGGZTJ_DQ_3_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
-											</c:if>
-										</ul>
-										</div>
-									</div>
-								</td> --%>
+								<td>${var.DLRC}</td>
+								<td>${var.DLRCRJ}</td>
+								<td>
+								<a href="<%=basePath%>systemload/listbyid?DWBM=${var.DWBM}">${var.YHSL}</a>
+								</td>
+								<td>
+									<a href="<%=basePath%>systemload/listbyAdministratorcount?DWBM=${var.DWBM}">${var.GLYSL}</a>
+								</td>
 							</tr>
 						
 						</c:forEach>
@@ -129,21 +108,6 @@
 				</tbody>
 			</table>
 			
-		<div class="page-header position-relative">
-		<table style="width:100%;">
-			<tr>
-				<td style="vertical-align:top;">
-					<c:if test="${QX.add == 1 }">
-					<a class="btn btn-small btn-success" onclick="add();">新增</a>
-					</c:if>
-					<c:if test="${QX.del == 1 }">
-					<a class="btn btn-small btn-danger" onclick="makeAll('确定要删除选中的数据吗?');" title="批量删除" ><i class='icon-trash'></i></a>
-					</c:if>
-				</td>
-				<td style="vertical-align:top;"><div class="pagination" style="float: right;padding-top: 0px;margin-top: 0px;">${page.pageStr}</div></td>
-			</tr>
-		</table>
-		</div>
 		</form>
 	</div>
  

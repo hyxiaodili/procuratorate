@@ -102,6 +102,12 @@ public class MajorRealController extends BaseController {
 		String beginTime = pd.getString("beginTime");
 		String endTime = pd.getString("endTime");
 		String field1 = pd.getString("field1");
+		String DWMC = pd.getString("DWMC");
+		
+		if(null != DWMC && !"".equals(DWMC)){
+			DWMC = DWMC.trim();
+			pd.put("DWMC", DWMC);
+		}
 		
 		if(null != field1 && !"".equals(field1)){
 			field1 = field1.trim();
@@ -128,7 +134,7 @@ public class MajorRealController extends BaseController {
 		try{
 			page.setPd(pd);
 			List<PageData>	varList = majorRealService.listbyMajorreal(pd);	//列出AGGZTJ_DQ_3列表
-			mv.setViewName("majorstandard/sjzyyj_list");
+			mv.setViewName("majorreal/sjzyyj_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
@@ -141,8 +147,8 @@ public class MajorRealController extends BaseController {
 	/**
 	 * 单位名称超链接
 	 */
-	@RequestMapping(value="/listbyMajorrealEJ")
-	public ModelAndView listbyMajorrealEj(){
+	@RequestMapping(value="/listbyInvolvemajorEJ")
+	public ModelAndView listbyInvolvemajorEJ(){
 		logBefore(logger, "去修改YHSL页面");
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
@@ -173,8 +179,8 @@ public class MajorRealController extends BaseController {
 		}
 		
 		try {
-			List<PageData>	varList = majorRealService.listbyMajorrealEj(pd);	//根据ID读取
-			mv.setViewName("majorstandard/sjzy_list");
+			List<PageData>	varList = majorRealService.listbyInvolvemajorEJ(pd);	//根据ID读取
+			mv.setViewName("majorreal/sjzy_list");
 			mv.addObject("varList", varList);
 			mv.addObject("pd", pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限

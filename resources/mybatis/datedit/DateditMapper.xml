@@ -57,24 +57,31 @@
 			"AGGZTJ_DQ_3_ID" = #{AGGZTJ_DQ_3_ID}
 	</select>
 	
+	<select id="listbyUnitname" parameterType="pd" resultType="pd">
+		select dwbm,dwmc,slrqxg_jcjs,bjrqxg_jcjs,dqrqxg_jcjs 
+		from T_AGGZTJ_DQ_4 t 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
+		order by dwbm asc
+	</select>
+	
 	<select id="listbyAccept" parameterType="pd" resultType="pd">
 		select ajlb_mc,bmsah,xgsj,czr,yrq,xrq,xgyy
 		from v_slrqxgjl_jcjs t 
-		where t.dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by ajlb_bm,bmsah,xgsj asc
 	</select>
 	
 	<select id="listbyConclude" parameterType="pd" resultType="pd">
 		select ajlb_mc,bmsah,xgsj,czr,yrq,xrq,xgyy 
 		from v_bjrqxgjl_jcjs t 
-		where t.dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by ajlb_bm,bmsah,xgsj asc
 	</select>
 	
 	<select id="listbyExpire" parameterType="pd" resultType="pd">
 		select ajlb_mc,bmsah,xgsj,czr,yrq,xrq,xgyy 
 		from v_dqrqxgjl_jcjs t 
-		where t.dwbm like CONCAT(CONCAT('%', #{YHSL_ID}),'%') 
+		where t.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
 		order by ajlb_bm,bmsah,xgsj asc
 	</select>
 	
@@ -93,7 +100,8 @@
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
-				a."DWMC",	
+				a."DWBM",
+				a."DWMC",
 				a."SLRQXG_JCJS",	
 				a."BJRQXG_JCJS",	
 				a."DQRQXG_JCJS",	

@@ -65,108 +65,72 @@
 	
 	<!-- 列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
-		 select a.dwbm, a.dwmc,
-		 nvl(wtbm04_jcjs_zdysj,'0') wtbm04_jcjs_zdysj,
-		 nvl(wtbm05_jcjs_zdysj,'0') wtbm05_jcjs_zdysj,
-		 nvl(wtbm02_jcjs_zdysj,'0') wtbm02_jcjs_zdysj,
-		 nvl(wtbm03_jcjs_zdysj,'0') wtbm03_jcjs_zdysj,
-		 nvl(wtbm06_jcjs_zdysj,'0') wtbm06_jcjs_zdysj,
-		 nvl(wtbm07_jcjs_zdysj,'0') wtbm07_jcjs_zdysj, 	
-		 nvl(wtbm08_jcjs_zdysj,'0') wtbm08_jcjs_zdysj,
-		 nvl(wtbm09_jcjs_zdysj,'0') wtbm09_jcjs_zdysj,
-		 nvl(wtbm10_jcjs_zdysj,'0') wtbm10_jcjs_zdysj,
-		 nvl(wtbm11_jcjs_zdysj,'0') wtbm11_jcjs_zdysj,
-		 nvl(wtbm14_jcjs_zdysj,'0') wtbm14_jcjs_zdysj,
-		 nvl(wtbm01_jcjs_zdysj,'0') wtbm01_jcjs_zdysj,
-		 nvl(wtbm13_jcjs_zdysj,'0') wtbm13_jcjs_zdysj,
-		 nvl(wtbm12_jcjs_zdysj,'0') wtbm12_jcjs_zdysj,
-		 nvl(wtbm30_jcjs_zdysj,'0') wtbm30_jcjs_zdysj,
-		 nvl(wtbm21_jcjs_zdysj,'0') wtbm21_jcjs_zdysj,
-		 nvl(wtbm22_jcjs_zdysj,'0') wtbm22_jcjs_zdysj,
-		 nvl(wtbm23_jcjs_zdysj,'0') wtbm23_jcjs_zdysj,
-		 nvl(wtbm24_jcjs_zdysj,'0') wtbm24_jcjs_zdysj
-	   from t_aggztj_dq_3 a ,
-	   (select t.DWBM,
-	    count(case when t.DWBM like '2301%' then t.bmsah end) wtbm04_jcjs_zdysj,
-	    count(case when t.DWBM like '2302%' then t.bmsah end) wtbm05_jcjs_zdysj,  
-	    count(case when t.DWBM like '2303%' then t.bmsah end) wtbm02_jcjs_zdysj, 
-	    count(case when t.DWBM like '2304%' then t.bmsah end) wtbm03_jcjs_zdysj,  
-	    count(case when t.DWBM like '2305%' then t.bmsah end) wtbm06_jcjs_zdysj,  
-	    count(case when t.DWBM like '2306%' then t.bmsah end) wtbm07_jcjs_zdysj,  
-	    count(case when t.DWBM like '2307%' then t.bmsah end) wtbm08_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm09_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm10_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm11_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm14_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm01_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm13_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm12_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm30_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm21_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm22_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm23_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm24_jcjs_zdysj 
-	    from t_ajjbxx_jcjs t
-	    where t.WTBM like CONCAT(CONCAT('%', #{field1}),'%')
-	    and t.slrq between to_date(#{beginTime,jdbcType=DATE},'yyyy-mm-dd hh24:mi:ss') 
-	    AND to_date(#{endTime,jdbcType=DATE},'yyyy-mm-dd hh24:mi:ss')
-	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
-	    group by t.DWBM 
-	   ) b
-	    where a.dwbm = substr(b.DWBM(+),1,4) order by DWBM asc
+		 select dwbm,dwmc,wtbm04_jcjs_zdysj,wtbm05_jcjs_zdysj,wtbm02_jcjs_zdysj,wtbm03_jcjs_zdysj,wtbm06_jcjs_zdysj,wtbm07_jcjs_zdysj,wtbm08_jcjs_zdysj,wtbm09_jcjs_zdysj,wtbm10_jcjs_zdysj,wtbm11_jcjs_zdysj,wtbm14_jcjs_zdysj,wtbm01_jcjs_zdysj,wtbm13_jcjs_zdysj,wtbm12_jcjs_zdysj,wtbm30_jcjs_zdysj,wtbm21_jcjs_zdysj,wtbm22_jcjs_zdysj,wtbm23_jcjs_zdysj,wtbm24_jcjs_zdysj
+from
+(select b.dwbm,b.dwmc,nvl(wtbm04_jcjs_zdysj,'0')wtbm04_jcjs_zdysj,nvl(wtbm05_jcjs_zdysj,'0')wtbm05_jcjs_zdysj,nvl(wtbm02_jcjs_zdysj,'0')wtbm02_jcjs_zdysj,nvl(wtbm03_jcjs_zdysj,'0')wtbm03_jcjs_zdysj,nvl(wtbm06_jcjs_zdysj,'0')wtbm06_jcjs_zdysj,nvl(wtbm07_jcjs_zdysj,'0')wtbm07_jcjs_zdysj,nvl(wtbm08_jcjs_zdysj,'0')wtbm08_jcjs_zdysj,nvl(wtbm09_jcjs_zdysj,'0')wtbm09_jcjs_zdysj,nvl(wtbm10_jcjs_zdysj,'0')wtbm10_jcjs_zdysj,nvl(wtbm11_jcjs_zdysj,'0')wtbm11_jcjs_zdysj,nvl(wtbm14_jcjs_zdysj,'0')wtbm14_jcjs_zdysj,nvl(wtbm01_jcjs_zdysj,'0')wtbm01_jcjs_zdysj,nvl(wtbm13_jcjs_zdysj,'0')wtbm13_jcjs_zdysj,nvl(wtbm12_jcjs_zdysj,'0')wtbm12_jcjs_zdysj,nvl(wtbm30_jcjs_zdysj,'0')wtbm30_jcjs_zdysj,nvl(wtbm21_jcjs_zdysj,'0')wtbm21_jcjs_zdysj,nvl(wtbm22_jcjs_zdysj,'0')wtbm22_jcjs_zdysj,nvl(wtbm23_jcjs_zdysj,'0')wtbm23_jcjs_zdysj,nvl(wtbm24_jcjs_zdysj,'0')wtbm24_jcjs_zdysj 
+from
+(select dwbm,sum(wtbm04_jcjs_zdysj) wtbm04_jcjs_zdysj,sum(wtbm05_jcjs_zdysj) wtbm05_jcjs_zdysj,sum(wtbm02_jcjs_zdysj) wtbm02_jcjs_zdysj,sum(wtbm03_jcjs_zdysj) wtbm03_jcjs_zdysj,sum(wtbm06_jcjs_zdysj) wtbm06_jcjs_zdysj,sum(wtbm07_jcjs_zdysj) wtbm07_jcjs_zdysj,sum(wtbm08_jcjs_zdysj) wtbm08_jcjs_zdysj,sum(wtbm09_jcjs_zdysj) wtbm09_jcjs_zdysj,sum(wtbm10_jcjs_zdysj) wtbm10_jcjs_zdysj,sum(wtbm11_jcjs_zdysj) wtbm11_jcjs_zdysj,sum(wtbm14_jcjs_zdysj) wtbm14_jcjs_zdysj,sum(wtbm01_jcjs_zdysj) wtbm01_jcjs_zdysj,sum(wtbm13_jcjs_zdysj) wtbm13_jcjs_zdysj,sum(wtbm12_jcjs_zdysj) wtbm12_jcjs_zdysj,sum(wtbm30_jcjs_zdysj) wtbm30_jcjs_zdysj,sum(wtbm21_jcjs_zdysj) wtbm21_jcjs_zdysj,sum(wtbm22_jcjs_zdysj) wtbm22_jcjs_zdysj,sum(wtbm23_jcjs_zdysj) wtbm23_jcjs_zdysj, sum(wtbm24_jcjs_zdysj) wtbm24_jcjs_zdysj
+from
+(select
+        substr(t.DWBM,1,4) dwbm,
+        count (distinct((case when t.WTBM like '9916192621201%' then t.bmsah end))) wtbm04_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621202%' then t.bmsah end))) wtbm05_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621203%' then t.bmsah end))) wtbm02_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621204%' then t.bmsah end))) wtbm03_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621205%' then t.bmsah end))) wtbm06_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621206%' then t.bmsah end))) wtbm07_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621207%' then t.bmsah end))) wtbm08_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621208%' then t.bmsah end))) wtbm09_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621209%' then t.bmsah end))) wtbm10_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621210%' then t.bmsah end))) wtbm11_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621211%' then t.bmsah end))) wtbm14_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621212%' then t.bmsah end))) wtbm01_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621213%' then t.bmsah end))) wtbm13_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621214%' then t.bmsah end))) wtbm12_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621299%' then t.bmsah end))) wtbm30_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '99161926211%'   then t.bmsah end))) wtbm21_jcjs_zdysj,                  
+        count (distinct((case when t.WTBM like '99161926213%'   then t.bmsah end))) wtbm22_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '99161926215%'   then t.bmsah end))) wtbm23_jcjs_zdysj,                  
+        count (distinct((case when (t.WTBM like '99161926990%' or t.WTBM is null) then t.bmsah end))) wtbm24_jcjs_zdysj 
+ from t_ajjbxx_jcjs t
+where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+group by substr(t.DWBM,1,4)) p group by dwbm,wtbm04_jcjs_zdysj,wtbm05_jcjs_zdysj,wtbm02_jcjs_zdysj,wtbm03_jcjs_zdysj,wtbm06_jcjs_zdysj,wtbm07_jcjs_zdysj,wtbm08_jcjs_zdysj,wtbm09_jcjs_zdysj,wtbm10_jcjs_zdysj,wtbm11_jcjs_zdysj,wtbm14_jcjs_zdysj,wtbm01_jcjs_zdysj,wtbm13_jcjs_zdysj,wtbm12_jcjs_zdysj,wtbm30_jcjs_zdysj,wtbm21_jcjs_zdysj,wtbm22_jcjs_zdysj,wtbm23_jcjs_zdysj,wtbm24_jcjs_zdysj) a right join t_aggztj_dq_3 b on a.dwbm=b.dwbm ) where dwmc not like '%总计%'order by dwbm
 	</select>
 	
+	<!-- 一级超链接 -->
 	<select id="findlistByEntrustdept" parameterType="pd" resultType="pd">
-		 select a.dwbm, a.dwmc,
-		 nvl(wtbm04_jcjs_zdysj,'0') wtbm04_jcjs_zdysj,
-		 nvl(wtbm05_jcjs_zdysj,'0') wtbm05_jcjs_zdysj,
-		 nvl(wtbm02_jcjs_zdysj,'0') wtbm02_jcjs_zdysj,
-		 nvl(wtbm03_jcjs_zdysj,'0') wtbm03_jcjs_zdysj,
-		 nvl(wtbm06_jcjs_zdysj,'0') wtbm06_jcjs_zdysj,
-		 nvl(wtbm07_jcjs_zdysj,'0') wtbm07_jcjs_zdysj, 	
-		 nvl(wtbm08_jcjs_zdysj,'0') wtbm08_jcjs_zdysj,
-		 nvl(wtbm09_jcjs_zdysj,'0') wtbm09_jcjs_zdysj,
-		 nvl(wtbm10_jcjs_zdysj,'0') wtbm10_jcjs_zdysj,
-		 nvl(wtbm11_jcjs_zdysj,'0') wtbm11_jcjs_zdysj,
-		 nvl(wtbm14_jcjs_zdysj,'0') wtbm14_jcjs_zdysj,
-		 nvl(wtbm01_jcjs_zdysj,'0') wtbm01_jcjs_zdysj,
-		 nvl(wtbm13_jcjs_zdysj,'0') wtbm13_jcjs_zdysj,
-		 nvl(wtbm12_jcjs_zdysj,'0') wtbm12_jcjs_zdysj,
-		 nvl(wtbm30_jcjs_zdysj,'0') wtbm30_jcjs_zdysj,
-		 nvl(wtbm21_jcjs_zdysj,'0') wtbm21_jcjs_zdysj,
-		 nvl(wtbm22_jcjs_zdysj,'0') wtbm22_jcjs_zdysj,
-		 nvl(wtbm23_jcjs_zdysj,'0') wtbm23_jcjs_zdysj,
-		 nvl(wtbm24_jcjs_zdysj,'0') wtbm24_jcjs_zdysj
-	   from t_aggztj_dq_4 a ,
-	   (select t.DWBM,
-	    count(case when t.DWBM like '230101%' then t.bmsah end) wtbm04_jcjs_zdysj,
-	    count(case when t.DWBM like '230202%' then t.bmsah end) wtbm05_jcjs_zdysj,  
-	    count(case when t.DWBM like '230303%' then t.bmsah end) wtbm02_jcjs_zdysj, 
-	    count(case when t.DWBM like '230404%' then t.bmsah end) wtbm03_jcjs_zdysj,  
-	    count(case when t.DWBM like '230505%' then t.bmsah end) wtbm06_jcjs_zdysj,  
-	    count(case when t.DWBM like '230606%' then t.bmsah end) wtbm07_jcjs_zdysj,  
-	    count(case when t.DWBM like '230707%' then t.bmsah end) wtbm08_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm09_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm10_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm11_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm14_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm01_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm13_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm12_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm30_jcjs_zdysj,
-		count(case when t.DWBM like '230707%' then t.bmsah end) wtbm21_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm22_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm23_jcjs_zdysj,
-		count(case when t.DWBM like '2307%' then t.bmsah end) wtbm24_jcjs_zdysj 
-	    from t_ajjbxx_jcjs t
-	    where t.WTBM like CONCAT(CONCAT('%', #{field1}),'%')
-	    and t.slrq between to_date(#{beginTime,jdbcType=DATE},'yyyy-mm-dd hh24:mi:ss') 
-	    AND to_date(#{endTime,jdbcType=DATE},'yyyy-mm-dd hh24:mi:ss')
-	    --and t.DWBM like substr(t.DWBM,1,4) || '%' 
-	    group by t.DWBM 
-	   ) b
-	    where a.dwbm = substr(b.DWBM(+),1,6) and a.dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') 
-	    order by DWBM asc
+		 select dwbm,dwmc,wtbm04_jcjs_zdysj,wtbm05_jcjs_zdysj,wtbm02_jcjs_zdysj,wtbm03_jcjs_zdysj,wtbm06_jcjs_zdysj,wtbm07_jcjs_zdysj,wtbm08_jcjs_zdysj,wtbm09_jcjs_zdysj,wtbm10_jcjs_zdysj,wtbm11_jcjs_zdysj,wtbm14_jcjs_zdysj,wtbm01_jcjs_zdysj,wtbm13_jcjs_zdysj,wtbm12_jcjs_zdysj,wtbm30_jcjs_zdysj,wtbm21_jcjs_zdysj,wtbm22_jcjs_zdysj,wtbm23_jcjs_zdysj,wtbm24_jcjs_zdysj
+from
+(select b.dwbm,b.dwmc,nvl(wtbm04_jcjs_zdysj,'0')wtbm04_jcjs_zdysj,nvl(wtbm05_jcjs_zdysj,'0')wtbm05_jcjs_zdysj,nvl(wtbm02_jcjs_zdysj,'0')wtbm02_jcjs_zdysj,nvl(wtbm03_jcjs_zdysj,'0')wtbm03_jcjs_zdysj,nvl(wtbm06_jcjs_zdysj,'0')wtbm06_jcjs_zdysj,nvl(wtbm07_jcjs_zdysj,'0')wtbm07_jcjs_zdysj,nvl(wtbm08_jcjs_zdysj,'0')wtbm08_jcjs_zdysj,nvl(wtbm09_jcjs_zdysj,'0')wtbm09_jcjs_zdysj,nvl(wtbm10_jcjs_zdysj,'0')wtbm10_jcjs_zdysj,nvl(wtbm11_jcjs_zdysj,'0')wtbm11_jcjs_zdysj,nvl(wtbm14_jcjs_zdysj,'0')wtbm14_jcjs_zdysj,nvl(wtbm01_jcjs_zdysj,'0')wtbm01_jcjs_zdysj,nvl(wtbm13_jcjs_zdysj,'0')wtbm13_jcjs_zdysj,nvl(wtbm12_jcjs_zdysj,'0')wtbm12_jcjs_zdysj,nvl(wtbm30_jcjs_zdysj,'0')wtbm30_jcjs_zdysj,nvl(wtbm21_jcjs_zdysj,'0')wtbm21_jcjs_zdysj,nvl(wtbm22_jcjs_zdysj,'0')wtbm22_jcjs_zdysj,nvl(wtbm23_jcjs_zdysj,'0')wtbm23_jcjs_zdysj,nvl(wtbm24_jcjs_zdysj,'0')wtbm24_jcjs_zdysj 
+from
+(select dwbm,sum(wtbm04_jcjs_zdysj) wtbm04_jcjs_zdysj,sum(wtbm05_jcjs_zdysj) wtbm05_jcjs_zdysj,sum(wtbm02_jcjs_zdysj) wtbm02_jcjs_zdysj,sum(wtbm03_jcjs_zdysj) wtbm03_jcjs_zdysj,sum(wtbm06_jcjs_zdysj) wtbm06_jcjs_zdysj,sum(wtbm07_jcjs_zdysj) wtbm07_jcjs_zdysj,sum(wtbm08_jcjs_zdysj) wtbm08_jcjs_zdysj,sum(wtbm09_jcjs_zdysj) wtbm09_jcjs_zdysj,sum(wtbm10_jcjs_zdysj) wtbm10_jcjs_zdysj,sum(wtbm11_jcjs_zdysj) wtbm11_jcjs_zdysj,sum(wtbm14_jcjs_zdysj) wtbm14_jcjs_zdysj,sum(wtbm01_jcjs_zdysj) wtbm01_jcjs_zdysj,sum(wtbm13_jcjs_zdysj) wtbm13_jcjs_zdysj,sum(wtbm12_jcjs_zdysj) wtbm12_jcjs_zdysj,sum(wtbm30_jcjs_zdysj) wtbm30_jcjs_zdysj,sum(wtbm21_jcjs_zdysj) wtbm21_jcjs_zdysj,sum(wtbm22_jcjs_zdysj) wtbm22_jcjs_zdysj,sum(wtbm23_jcjs_zdysj) wtbm23_jcjs_zdysj, sum(wtbm24_jcjs_zdysj) wtbm24_jcjs_zdysj
+from
+(select
+        substr(t.DWBM,1,6) dwbm,
+        count (distinct((case when t.WTBM like '9916192621201%' then t.bmsah end))) wtbm04_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621202%' then t.bmsah end))) wtbm05_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621203%' then t.bmsah end))) wtbm02_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621204%' then t.bmsah end))) wtbm03_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621205%' then t.bmsah end))) wtbm06_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621206%' then t.bmsah end))) wtbm07_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621207%' then t.bmsah end))) wtbm08_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621208%' then t.bmsah end))) wtbm09_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621209%' then t.bmsah end))) wtbm10_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621210%' then t.bmsah end))) wtbm11_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621211%' then t.bmsah end))) wtbm14_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621212%' then t.bmsah end))) wtbm01_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621213%' then t.bmsah end))) wtbm13_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621214%' then t.bmsah end))) wtbm12_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '9916192621299%' then t.bmsah end))) wtbm30_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '99161926211%'   then t.bmsah end))) wtbm21_jcjs_zdysj,                  
+        count (distinct((case when t.WTBM like '99161926213%'   then t.bmsah end))) wtbm22_jcjs_zdysj,                 
+        count (distinct((case when t.WTBM like '99161926215%'   then t.bmsah end))) wtbm23_jcjs_zdysj,                  
+        count (distinct((case when (t.WTBM like '99161926990%' or t.WTBM is null) then t.bmsah end))) wtbm24_jcjs_zdysj  
+  from t_ajjbxx_jcjs t
+ where t.slrq between to_date(#{beginTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss') 
+ AND to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+   group by substr(t.DWBM,1,6)) p group by dwbm,wtbm04_jcjs_zdysj,wtbm05_jcjs_zdysj,wtbm02_jcjs_zdysj,wtbm03_jcjs_zdysj,wtbm06_jcjs_zdysj,wtbm07_jcjs_zdysj,wtbm08_jcjs_zdysj,wtbm09_jcjs_zdysj,wtbm10_jcjs_zdysj,wtbm11_jcjs_zdysj,wtbm14_jcjs_zdysj,wtbm01_jcjs_zdysj,wtbm13_jcjs_zdysj,wtbm12_jcjs_zdysj,wtbm30_jcjs_zdysj,wtbm21_jcjs_zdysj,wtbm22_jcjs_zdysj,wtbm23_jcjs_zdysj,wtbm24_jcjs_zdysj) a right join t_aggztj_dq_4 b on a.dwbm=b.dwbm) where dwbm like CONCAT(CONCAT('%', #{DWBM}),'%') order by dwbm
 	</select>
 	
 	<!-- 超链接 -->
